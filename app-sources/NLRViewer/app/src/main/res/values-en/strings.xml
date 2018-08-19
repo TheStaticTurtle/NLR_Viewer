@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">New lunar republic</string>
+    <string name="title_activity_video_player">VideoPlayer</string>
+    <string name="title_activity_send_mail">Report a bug</string>
+
+    <string name="navigation_drawer_open">Open nav</string>
+    <string name="navigation_drawer_close">Close nav</string>
+
+    <string name="display_season">Saison</string>
+    <string name="display_episode">Episode </string>
+    <string name="app_appTitle">NLR Viewer</string>
+    <string name="drawer_appTitle">New Lunar Republic App</string>
+    <string name="drawer_episode">Episodes</string>
+    <string name="drawer_films">Films</string>
+    <string name="drawer_social">Social</string>
+    <string name="drawer_other">Others</string>
+    <string name="drawer_nlrsite">Nlr website</string>
+    <string name="drawer_aboutdev">About</string>
+    <string name="about_title">About</string>
+    <string name="aboutapp_text">
+        Api usages: \n
+        com.squareup.picasso:picasso:2.71828  \n
+        org.jsoup:jsoup:1.11.3  \n
+        com.github.ybq:Android-SpinKit:1.1.0  \n
+        com.github.halilozercan:BetterVideoPlayer:1.2.alpha1  \n
+        com.android.support:customtabs:25.1.0+  \n
+        \n
+        Information gathering:\n
+        https://newlunarrepublic.fr/api/news  \n
+        https://newlunarrepublic.fr/api/episodes  \n
+        https://newlunarrepublic.fr/api/films  \n
+        https://newlunarrepublic.fr/api/comics  \n
+        https://newlunarrepublic.fr/api/recrutement  \n
+        https://newlunarrepublic.fr/api/bonus  \n
+        \n
+        Color palete: \n
+        https://www.deviantart.com/midnightblitzz/
+    </string>
+
+    <string name="drawer_bugreport">Report a bug</string>
+    <string name="email_title">Title: </string>
+    <string name="email_msg">Message: </string>
+    <string name="email_needinstall">YOu have ton install a mail client</string>
+    <string name="email_sended">Send via mail</string>
+    <string name="email_intentText">Send report via mail</string>
+
+    <string name="social_nlr_title">Social</string>
+    <string name="social_nlr_paypal">Nlr\'s paypal</string>
+
+    <string name="drawer_allies">Allied</string>
+
+    <string name="drawer_news">News</string>
+
+    <string name="drawer_comicen">Comics EN</string>
+    <string name="drawer_comicfr">Comics FR</string>
+
+
+    <string name="aboutdev_title">About the dev</string>
+    <string name="aboutdev_by">App developed by turtleforgaming</string>
+    <string name="aboutdev_copiedtoclip">Copied into clipboard</string>
+    <string name="aboutdev_appapps">How I\'ve code this app</string>
+
+    <string name="title_activity_video_player_v2">VideoPlayerV2</string>
+    <string name="title_activity_video_player_activatesubs">Activate subtitles</string>
+    <string name="title_activity_video_player_desactivatesubs">Desactivate subtitles</string>
+    <string name="title_activity_video_player_hideui">Hide UI</string>
+    <string name="title_activity_video_player_rescale">Rescale</string>
+    <string name="video_reloaderror">There was an error loading the video and will reload\nIf this happen a lot try lowering the quality\The video will restart now</string>
+
+
+    <string name="loadingscreen_initial">Loading content.</string>
+    <string name="loadingscreen_updatingviews">Displaying content.</string>
+
+    <string name="menu_reloadcontent">Refresh content</string>
+    <string name="menu_settings_style">Theme</string>
+    <string name="menu_settings">Settings</string>
+
+    <string name="menu_settings_lang">Lang</string>
+    <string name="menu_settings_save">Save</string>
+
+    <string name="drawer_bonus">Bonus episodes</string>
+    <string name="action_newversion">New version</string>
+    <string name="action_actualversion">Actual version</string>
+    <string name="action_newupdate">New update</string>
+</resources>

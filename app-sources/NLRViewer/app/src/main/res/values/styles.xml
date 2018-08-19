@@ -1,0 +1,133 @@
+<resources>
+
+    <!-- Defaults theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="videoPlayer" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MLPTheme_TwilightSparkle" parent="AppTheme" >
+        <item name="colorPrimaryDark">@color/colorMLPPALLETE_TwilightSparkleTheme_mane_Darker</item>
+        <item name="colorPrimary">@color/colorMLPPALLETE_TwilightSparkleTheme_mane_Dark</item>
+        <item name="colorAccent">@color/colorMLPPALLETE_TwilightSparkleTheme_cutieMark_color1</item>
+        <item name="android:colorBackground">@color/colorMLPPALLETE_TwilightSparkleTheme_body_main</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+    <style name="MLPTheme_AppleJack" parent="AppTheme" >
+        <item name="colorPrimaryDark">@color/colorMLPPALLETE_AppleJackTheme_cutieMark_color2</item>
+        <item name="colorPrimary">@color/colorMLPPALLETE_AppleJackTheme_body_stroke</item>
+        <item name="colorAccent">@color/colorMLPPALLETE_AppleJackTheme_cutieMark_color1</item>
+        <item name="android:colorBackground">@color/colorMLPPALLETE_AppleJackTheme_mane_Light</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+    <style name="MLPTheme_PinkiePie" parent="AppTheme" >
+        <item name="colorPrimaryDark">@color/colorMLPPALLETE_PinkiePieTheme_mane_Dark</item>
+        <item name="colorPrimary">@color/colorMLPPALLETE_PinkiePieTheme_body_stroke</item>
+        <item name="colorAccent">@color/colorMLPPALLETE_PinkiePieTheme_cutieMark_color1</item>
+        <item name="android:colorBackground">@color/colorMLPPALLETE_PinkiePieTheme_body_main</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+    <style name="MLPTheme_Rarity" parent="AppTheme" >
+        <item name="colorPrimaryDark">@color/colorMLPPALLETE_RarityTheme_mane_Stroke</item>
+        <item name="colorPrimary">@color/colorMLPPALLETE_RarityTheme_mane_Dark</item>
+        <item name="colorAccent">@color/colorMLPPALLETE_RarityTheme_mane_Light</item>
+        <item name="android:colorBackground">@color/colorMLPPALLETE_RarityTheme_body_main</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+    <style name="MLPTheme_FluterShy" parent="AppTheme" >
+        <item name="colorPrimaryDark">@color/colorMLPPALLETE_FlutterShyTheme_mane_Stroke</item>
+        <item name="colorPrimary">@color/colorMLPPALLETE_FlutterShyTheme_body_stroke</item>
+        <item name="colorAccent">@color/colorMLPPALLETE_FlutterShyTheme_cutieMark_color2</item>
+        <item name="android:colorBackground">@color/colorMLPPALLETE_FlutterShyTheme_body_main</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+    <style name="MLPTheme_RainBowDash" parent="AppTheme" >
+        <item name="colorPrimaryDark">@color/colorMLPPALLETE_RainbowDashTheme_mane_Light</item>
+        <item name="colorPrimary">@color/colorMLPPALLETE_RainbowDashTheme_mane_Dark</item>
+        <item name="colorAccent">@color/colorMLPPALLETE_RainbowDashTheme_mane_Stroke</item>
+        <item name="android:colorBackground">@color/colorMLPPALLETE_RainbowDashTheme_body_main</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+    <style name="MLPTheme_Spike" parent="AppTheme" >
+        <item name="colorPrimaryDark">@color/colorMLPPALLETE_SpikeTheme_mane_Dark</item>
+        <item name="colorPrimary">@color/colorMLPPALLETE_SpikeTheme_mane_Darker</item>
+        <item name="colorAccent">@color/colorMLPPALLETE_SpikeTheme_cutieMark_color2</item>
+        <item name="android:colorBackground">@color/colorMLPPALLETE_SpikeTheme_body_main</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+    <style name="MLPTheme_Luna" parent="AppTheme" >
+        <item name="colorPrimaryDark">@color/colorMLPPALLETE_LunaTheme_body_stroke</item>
+        <item name="colorPrimary">@color/colorMLPPALLETE_LunaTheme_mane_Dark</item>
+        <item name="colorAccent">@color/colorMLPPALLETE_LunaTheme_cutieMark_color2</item>
+        <item name="android:colorBackground">@color/colorMLPPALLETE_LunaTheme_body_main</item>
+        <item name="android:textColorPrimary">@color/colorMLPPALLETE_LunaTheme_cutieMark_color2_alpha2</item> <!-- alpha -->
+        <item name="android:textColorSecondary">@color/colorMLPPALLETE_LunaTheme_cutieMark_color2</item>
+        <item name="android:textColorTertiary">@color/colorMLPPALLETE_LunaTheme_cutieMark_color2_alpha</item> <!-- alpha -->
+        <item name="android:textColor">@color/colorMLPPALLETE_LunaTheme_cutieMark_color2_alpha</item> <!-- alpha -->
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="MLPTheme_Celestia" parent="AppTheme" >
+        <item name="colorPrimaryDark">@color/colorMLPPALLETE_CelestiaTheme_cutieMark_color1</item>
+        <item name="colorPrimary">@color/colorMLPPALLETE_CelestiaTheme_cutieMark_color2</item>
+        <item name="colorAccent">@color/colorMLPPALLETE_CelestiaTheme_cutieMark_magicAura</item>
+        <item name="android:colorBackground">@color/colorMLPPALLETE_CelestiaTheme_body_main</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="MLPTheme_KingSombra" parent="AppTheme" >
+        <item name="colorPrimaryDark">@color/colorMLPPALLETE_KingSombraTheme_eyes_gradient_light</item>
+        <item name="colorPrimary">@color/colorMLPPALLETE_KingSombraTheme_cutieMark_color1</item>
+        <item name="colorAccent">@color/colorMLPPALLETE_KingSombraTheme_mane_Light</item>
+        <item name="android:colorBackground">@color/colorMLPPALLETE_KingSombraTheme_body_stroke</item>
+        <item name="android:textColorPrimary">@color/colorMLPPALLETE_LunaTheme_cutieMark_color2_alpha2</item> <!-- alpha -->
+        <item name="android:textColorSecondary">@color/colorMLPPALLETE_LunaTheme_cutieMark_color2</item>
+        <item name="android:textColorTertiary">@color/colorMLPPALLETE_LunaTheme_cutieMark_color2_alpha</item> <!-- alpha -->
+        <item name="android:textColor">@color/colorMLPPALLETE_LunaTheme_cutieMark_color2_alpha</item> <!-- alpha -->
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="AlertDialogCustom" parent="@android:style/Theme.DeviceDefault.Light.Dialog">
+        <item name="android:textColor">#ee000000</item>
+        <!-- <item name="android:textColorPrimary">#ee000000</item>
+        <item name="android:textColorSecondary">#ee000000</item>
+        <item name="android:textColorTertiary">#ee000000</item>
+        <item name="android:background">#FFFFFFFF</item>
+        <item name="android:colorBackground">@android:color/white</item> -->
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

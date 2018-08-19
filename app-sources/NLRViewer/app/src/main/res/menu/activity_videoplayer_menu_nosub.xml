@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_vid_hide"
+            android:icon="@drawable/ic_videoplayer_hide"
+            android:title="@string/title_activity_video_player_hideui" />
+        <item
+            android:id="@+id/nav_vid_rescale"
+            android:icon="@drawable/ic_videoplayer_hide"
+            android:title="@string/title_activity_video_player_rescale" />
+    </group>
+</menu>

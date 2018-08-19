@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_episodes"
+            android:icon="@drawable/ic_menu_films"
+            android:title="@string/drawer_episode" />
+        <item
+            android:id="@+id/nav_films"
+            android:icon="@drawable/ic_menu_films2"
+            android:title="@string/drawer_films" />
+        <item
+            android:id="@+id/nav_bonus"
+            android:icon="@drawable/ic_menu_bonus"
+            android:title="@string/drawer_bonus" />
+        <item
+            android:id="@+id/nav_comicen"
+            android:icon="@drawable/ic_menu_comic"
+            android:title="@string/drawer_comicen" />
+        <item
+            android:id="@+id/nav_comicfr"
+            android:icon="@drawable/ic_menu_comic"
+            android:title="@string/drawer_comicfr" />
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_menu_news2"
+            android:title="@string/drawer_news" />
+        <item
+            android:id="@+id/nav_allies"
+            android:icon="@drawable/ic_menu_earth"
+            android:title="@string/drawer_allies" />
+        <item
+            android:id="@+id/nav_social"
+            android:icon="@drawable/ic_social_social"
+            android:title="@string/drawer_social" />
+    </group>
+
+    <item android:title="@string/drawer_other">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_menu_setting"
+                android:title="@string/menu_settings" />
+            <item
+                android:id="@+id/nav_aboutdev"
+                android:icon="@drawable/ic_menu_about"
+                android:title="@string/drawer_aboutdev" />
+            <item
+                android:id="@+id/nav_bugreport"
+                android:icon="@drawable/ic_menu_bug"
+                android:title="@string/drawer_bugreport" />
+            <item
+                android:id="@+id/nav_reload"
+                android:icon="@drawable/ic_menu_reload"
+                android:title="@string/menu_reloadcontent" />
+        </menu>
+    </item>
+
+</menu>

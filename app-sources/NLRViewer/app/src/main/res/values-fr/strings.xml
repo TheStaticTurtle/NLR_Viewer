@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">New lunar republic</string>
+    <string name="title_activity_video_player">VideoPlayer</string>
+    <string name="title_activity_send_mail">Reporter un bug</string>
+
+    <string name="navigation_drawer_open">Ouvrir la navigation</string>
+    <string name="navigation_drawer_close">Fermer la naigation</string>
+
+    <string name="display_season">Saison</string>
+    <string name="display_episode">Episode</string>
+    <string name="app_appTitle">NLR Viewer</string>
+    <string name="drawer_appTitle">New Lunar Republic App</string>
+    <string name="drawer_episode">Episodes </string>
+    <string name="drawer_films">Films</string>
+    <string name="drawer_social">Social</string>
+    <string name="drawer_other">Autres</string>
+    <string name="drawer_nlrsite">Site de la nlr</string>
+    <string name="drawer_aboutdev">A Propos</string>
+    <string name="about_title">A Propos</string>
+    <string name="aboutapp_text">
+        Utilisation des api suivates: \n
+        com.squareup.picasso:picasso:2.71828  \n
+        org.jsoup:jsoup:1.11.3  \n
+        com.github.ybq:Android-SpinKit:1.1.0  \n
+        com.github.halilozercan:BetterVideoPlayer:1.2.alpha1  \n
+        com.android.support:customtabs:25.1.0+  \n
+        \n
+        Recuperation des information:\n
+        https://newlunarrepublic.fr/api/news  \n
+        https://newlunarrepublic.fr/api/episodes  \n
+        https://newlunarrepublic.fr/api/films  \n
+        https://newlunarrepublic.fr/api/comics  \n
+        https://newlunarrepublic.fr/api/recrutement  \n
+        https://newlunarrepublic.fr/api/bonus  \n
+        \n
+        Color palete: \n
+        https://www.deviantart.com/midnightblitzz/
+    </string>
+
+    <string name="drawer_bugreport">Reporter un bug</string>
+    <string name="email_title">Titre: </string>
+    <string name="email_msg">Message: </string>
+    <string name="email_needinstall">Veuiller installer un client mail</string>
+    <string name="email_sended">Envoyer via mail</string>
+    <string name="email_intentText">Envoyer le rapport via MAIL</string>
+
+    <string name="social_nlr_title">Social</string>
+    <string name="social_nlr_paypal">Paypal de la nlr</string>
+
+    <string name="drawer_allies">Alliés</string>
+
+    <string name="drawer_news">Nouvelles</string>
+
+    <string name="drawer_comicen">Comics EN</string>
+    <string name="drawer_comicfr">Comics FR</string>
+
+
+    <string name="aboutdev_title">A propos du dev</string>
+    <string name="aboutdev_by">Application developer par turtleforgaming</string>
+    <string name="aboutdev_copiedtoclip">Copier dans le presse papier</string>
+    <string name="aboutdev_appapps">Comment j\'ai coder cette app</string>
+
+    <string name="title_activity_video_player_v2">VideoPlayerV2</string>
+    <string name="title_activity_video_player_activatesubs">Activer les sous-titres</string>
+    <string name="title_activity_video_player_desactivatesubs">Desactiver les sous-titres</string>
+    <string name="title_activity_video_player_hideui">Cacher l\'UI</string>
+    <string name="title_activity_video_player_rescale">Rescale</string>
+    <string name="video_reloaderror">Il y a eu une erreur durant le chargement de la video.\nSi cela arrive souvent essayer de diminuer la qualitée\nLa video va redemarer</string>
+
+
+    <string name="loadingscreen_initial">Le contenu vas charger sous peu.</string>
+    <string name="loadingscreen_updatingviews">Affichage du contenu en cour.</string>
+
+    <string name="menu_reloadcontent">Rafrachir le contenu</string>
+    <string name="menu_settings_style">Theme</string>
+    <string name="menu_settings">Parametres</string>
+    <string name="menu_settings_lang">Langue</string>
+    <string name="menu_settings_save">Sauvegarder</string>
+
+    <string name="drawer_bonus">Episodes bonus</string>
+    <string name="action_newversion">Nouvelle version</string>
+    <string name="action_actualversion">Version actuelle</string>
+    <string name="action_newupdate">Mise a jour disponible</string>
+</resources>

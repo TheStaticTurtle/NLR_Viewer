@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4080</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="episode_releasedColor">#FFFFFFFF</color>
+    <color name="episode_NOTreleasedColor">#22FF0000</color>
+    <color name="episode_embededColor">#22ff9d60</color>
+    <color name="subsColor_color">#ffffffff</color>
+
+
+    //<color name="colorMLPPALLETE__mane_Dark">#</color>
+    //<color name="colorMLPPALLETE__mane_Darker">#</color>
+    //<color name="colorMLPPALLETE__mane_Light">#</color>
+    //<color name="colorMLPPALLETE__mane_Stroke">#</color>
+    //<color name="colorMLPPALLETE__cutieMark_color1">#</color>
+    //<color name="colorMLPPALLETE__cutieMark_color2">#</color>
+    //<color name="colorMLPPALLETE__cutieMark_magicAura">#</color>
+    //<color name="colorMLPPALLETE__body_main">#</color>
+    //<color name="colorMLPPALLETE__body_stroke">#</color>
+
+    <color name="colorMLPPALLETE_TwilightSparkleTheme_mane_Dark">#653089</color>
+    <color name="colorMLPPALLETE_TwilightSparkleTheme_mane_Darker">#2B3674</color>
+    <color name="colorMLPPALLETE_TwilightSparkleTheme_mane_Light">#EA4790</color>
+    <color name="colorMLPPALLETE_TwilightSparkleTheme_mane_Stroke">#161F4A</color>
+    <color name="colorMLPPALLETE_TwilightSparkleTheme_cutieMark_color1">#EF5092</color>
+    <color name="colorMLPPALLETE_TwilightSparkleTheme_cutieMark_color2">#FFFFFF</color>
+    <color name="colorMLPPALLETE_TwilightSparkleTheme_cutieMark_magicAura">#ED488D</color>
+    <color name="colorMLPPALLETE_TwilightSparkleTheme_body_main">#DAADE8</color>
+    <color name="colorMLPPALLETE_TwilightSparkleTheme_body_stroke">#A76EBF</color>
+
+    <color name="colorMLPPALLETE_AppleJackTheme_mane_Dark">#FFF697</color>
+    <color name="colorMLPPALLETE_AppleJackTheme_mane_Darker">#FFF697</color>
+    <color name="colorMLPPALLETE_AppleJackTheme_mane_Light">#FFF697</color>
+    <color name="colorMLPPALLETE_AppleJackTheme_mane_Stroke">#E6D561</color>
+    <color name="colorMLPPALLETE_AppleJackTheme_cutieMark_color1">#7AC043</color>
+    <color name="colorMLPPALLETE_AppleJackTheme_cutieMark_color2">#EE4136</color>
+    <color name="colorMLPPALLETE_AppleJackTheme_cutieMark_magicAura">#FFFFFF</color>
+    <color name="colorMLPPALLETE_AppleJackTheme_body_main">#FABA5D</color>
+    <color name="colorMLPPALLETE_AppleJackTheme_body_stroke">#F37737</color>
+
+    <color name="colorMLPPALLETE_PinkiePieTheme_mane_Dark">#EF5093</color>
+    <color name="colorMLPPALLETE_PinkiePieTheme_mane_Darker">#EF5093</color>
+    <color name="colorMLPPALLETE_PinkiePieTheme_mane_Light">#EF5093</color>
+    <color name="colorMLPPALLETE_PinkiePieTheme_mane_Stroke">#E67EB3</color>
+    <color name="colorMLPPALLETE_PinkiePieTheme_cutieMark_color1">#72D0F6</color>
+    <color name="colorMLPPALLETE_PinkiePieTheme_cutieMark_color2">#FCF6A6</color>
+    <color name="colorMLPPALLETE_PinkiePieTheme_cutieMark_magicAura">#FFFFFF</color>
+    <color name="colorMLPPALLETE_PinkiePieTheme_body_main">#F8B9CE</color>
+    <color name="colorMLPPALLETE_PinkiePieTheme_body_stroke">#E67EB3</color>
+
+    <color name="colorMLPPALLETE_RarityTheme_mane_Dark">#654EA0</color>
+    <color name="colorMLPPALLETE_RarityTheme_mane_Darker">#4E266A</color>
+    <color name="colorMLPPALLETE_RarityTheme_mane_Light">#7A4A97</color>
+    <color name="colorMLPPALLETE_RarityTheme_mane_Stroke">#49176E</color>
+    <color name="colorMLPPALLETE_RarityTheme_cutieMark_color1">#0193CF</color>
+    <color name="colorMLPPALLETE_RarityTheme_cutieMark_color2">#71CFF5</color>
+    <color name="colorMLPPALLETE_RarityTheme_cutieMark_magicAura">#B0DCEEFF</color>
+    <color name="colorMLPPALLETE_RarityTheme_body_main">#EDF1F4</color>
+    <color name="colorMLPPALLETE_RarityTheme_body_stroke">#AEB9BF</color>
+
+    <color name="colorMLPPALLETE_FlutterShyTheme_mane_Dark">#F8B9CE</color>
+    <color name="colorMLPPALLETE_FlutterShyTheme_mane_Darker">#F8B9CE</color>
+    <color name="colorMLPPALLETE_FlutterShyTheme_mane_Light">#F8B9CE</color>
+    <color name="colorMLPPALLETE_FlutterShyTheme_mane_Stroke">#E57EB3</color>
+    <color name="colorMLPPALLETE_FlutterShyTheme_cutieMark_color1">#F8B9CEFF</color>
+    <color name="colorMLPPALLETE_FlutterShyTheme_cutieMark_color2">#70C7C1</color>
+    <color name="colorMLPPALLETE_FlutterShyTheme_cutieMark_magicAura">#FFFFFF</color>
+    <color name="colorMLPPALLETE_FlutterShyTheme_body_main">#FEE895</color>
+    <color name="colorMLPPALLETE_FlutterShyTheme_body_stroke">#E8D463</color>
+
+    <color name="colorMLPPALLETE_RainbowDashTheme_mane_Dark">#EF3F33</color>
+    <color name="colorMLPPALLETE_RainbowDashTheme_mane_Darker">#F67731</color>
+    <color name="colorMLPPALLETE_RainbowDashTheme_mane_Light">#7AC13E</color>
+    <color name="colorMLPPALLETE_RainbowDashTheme_mane_Stroke">#0292CD</color>
+    <color name="colorMLPPALLETE_RainbowDashTheme_cutieMark_color1">#F13F35</color>
+    <color name="colorMLPPALLETE_RainbowDashTheme_cutieMark_color2">#FFF697</color>
+    <color name="colorMLPPALLETE_RainbowDashTheme_cutieMark_magicAura">#FFFFFF</color>
+    <color name="colorMLPPALLETE_RainbowDashTheme_body_main">#9DD8F6</color>
+    <color name="colorMLPPALLETE_RainbowDashTheme_body_stroke">#6CAEE0</color>
+
+    <color name="colorMLPPALLETE_SpikeTheme_mane_Dark">#448745</color>
+    <color name="colorMLPPALLETE_SpikeTheme_mane_Darker">#50C355</color>
+    <color name="colorMLPPALLETE_SpikeTheme_mane_Light">#D7EBAE</color>
+    <color name="colorMLPPALLETE_SpikeTheme_mane_Stroke">#309931</color>
+    <color name="colorMLPPALLETE_SpikeTheme_cutieMark_color1">#55CE5D</color>
+    <color name="colorMLPPALLETE_SpikeTheme_cutieMark_color2">#C8FDB3</color>
+    <color name="colorMLPPALLETE_SpikeTheme_cutieMark_magicAura">#A2F27D</color>
+    <color name="colorMLPPALLETE_SpikeTheme_body_main">#C590C9</color>
+    <color name="colorMLPPALLETE_SpikeTheme_body_stroke">#9A5DA2</color>
+
+    <color name="colorMLPPALLETE_LunaTheme_mane_Dark">#2F55C3</color>
+    <color name="colorMLPPALLETE_LunaTheme_mane_Darker">#2F55C3</color>
+    <color name="colorMLPPALLETE_LunaTheme_mane_Light">#998159CE</color> // 50% alpha
+    <color name="colorMLPPALLETE_LunaTheme_mane_Stroke">#8159CE</color>
+    <color name="colorMLPPALLETE_LunaTheme_cutieMark_color1">#040404</color>
+    <color name="colorMLPPALLETE_LunaTheme_cutieMark_color2">#FFFFFF</color>
+    <color name="colorMLPPALLETE_LunaTheme_cutieMark_magicAura">#396CC8</color>
+    <color name="colorMLPPALLETE_LunaTheme_body_main">#404680</color>
+    <color name="colorMLPPALLETE_LunaTheme_body_stroke">#161D3F</color>
+
+    <color name="colorMLPPALLETE_CelestiaTheme_mane_Dark">#65CEA9</color>
+    <color name="colorMLPPALLETE_CelestiaTheme_mane_Darker">#8BABEE</color>
+    <color name="colorMLPPALLETE_CelestiaTheme_mane_Light">#E9A2F1</color>
+    <color name="colorMLPPALLETE_CelestiaTheme_mane_Stroke">#3F9FBF</color>
+    <color name="colorMLPPALLETE_CelestiaTheme_cutieMark_color1">#FFC585</color>
+    <color name="colorMLPPALLETE_CelestiaTheme_cutieMark_color2">#FFDE91</color>
+    <color name="colorMLPPALLETE_CelestiaTheme_cutieMark_magicAura">#FFFFBD</color>
+    <color name="colorMLPPALLETE_CelestiaTheme_body_main">#FCF9FC</color>
+    <color name="colorMLPPALLETE_CelestiaTheme_body_stroke">#ECD8E4</color>
+
+    -->
+</resources>
