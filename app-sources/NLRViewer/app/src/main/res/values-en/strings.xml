@@ -63,7 +63,7 @@
 
     <string name="title_activity_video_player_v2">VideoPlayerV2</string>
     <string name="title_activity_video_player_activatesubs">Activate subtitles</string>
-    <string name="title_activity_video_player_desactivatesubs">Desactivate subtitles</string>
+    <string name="title_activity_video_player_desactivatesubs">Deactivate subtitles</string>
     <string name="title_activity_video_player_hideui">Hide UI</string>
     <string name="title_activity_video_player_rescale">Rescale</string>
     <string name="video_reloaderror">There was an error loading the video and will reload\nIf this happen a lot try lowering the quality\The video will restart now</string>

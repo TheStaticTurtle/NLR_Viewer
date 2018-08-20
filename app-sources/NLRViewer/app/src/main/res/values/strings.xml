@@ -85,7 +85,7 @@
     <string name="loadingscreen_initial">Le contenu vas charger sous peu.</string>
     <string name="loadingscreen_updatingviews">Affichage du contenu en cour.</string>
 
-    <string name="menu_reloadcontent">Rafrachir le contenu</string>
+    <string name="menu_reloadcontent">Rafraichir le contenu</string>
     <string name="menu_settings_style">Theme</string>
     <string name="menu_settings">Parametres</string>
     <string-array name="menu_setting_styles">
