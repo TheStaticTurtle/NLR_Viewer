@@ -60,7 +60,7 @@ import java.util.logging.Logger;
 
 public class selector extends AppCompatActivity {
 
-    String CURRENTREVISION = "nlr_viewer.v1.2.5.apk";
+    String CURRENTREVISION = "nlr_viewer.v1.2.6.apk";
     boolean DEBUGMODE = false;
     MLP_Content NLRVIDEOCONTENT;
     NLR_Content NLRCONTENT;
@@ -112,7 +112,7 @@ public class selector extends AppCompatActivity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {  return true;   }
         return super.onOptionsItemSelected(item);
     }
-    public void firstSetUp(Boolean onCreate) {
+    public void firstSetUp(Boolean onCreate)    {
         ViewFlipper vf = (ViewFlipper)findViewById(R.id.layoutFlipper);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -340,8 +340,8 @@ public class selector extends AppCompatActivity {
                     ArrayList<NLR_ComicSeason> comicSeasonsFR = new ArrayList<>();
                     int globalComicCounterFR = 0;
 
-                    for(int i=0; i < jsonObjComicsEN.length(); i++) {
-                        JSONObject comicSeasonObj = ((JSONObject) jsonObjComicsEN.get(i));
+                    for(int i=0; i < jsonObjComicsFR.length(); i++) {
+                        JSONObject comicSeasonObj = ((JSONObject) jsonObjComicsFR.get(i));
                         NLR_ComicSeason currentSeason = new NLR_ComicSeason();
                         currentSeason.title = comicSeasonObj.getString("category");
                         JSONArray comicListObj = comicSeasonObj.getJSONArray("list");
