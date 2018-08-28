@@ -21,6 +21,10 @@
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
+    <style name="MLPTheme_TwilightSparkle_Player" parent="MLPTheme_TwilightSparkle" >
+        <item name="android:textColor">@color/videoPlayerTextColor</item> <!-- Menu Text Color -->
+    </style>
+
     <style name="MLPTheme_AppleJack" parent="AppTheme" >
         <item name="colorPrimaryDark">@color/colorMLPPALLETE_AppleJackTheme_cutieMark_color2</item>
         <item name="colorPrimary">@color/colorMLPPALLETE_AppleJackTheme_body_stroke</item>
@@ -29,6 +33,10 @@
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
+    <style name="MLPTheme_AppleJack_Player" parent="MLPTheme_AppleJack" >
+        <item name="android:textColor">@color/videoPlayerTextColor</item> <!-- Menu Text Color -->
+    </style>
+
     <style name="MLPTheme_PinkiePie" parent="AppTheme" >
         <item name="colorPrimaryDark">@color/colorMLPPALLETE_PinkiePieTheme_mane_Dark</item>
         <item name="colorPrimary">@color/colorMLPPALLETE_PinkiePieTheme_body_stroke</item>
@@ -37,6 +45,10 @@
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
+    <style name="MLPTheme_PinkiePie_Player" parent="MLPTheme_PinkiePie" >
+        <item name="android:textColor">@color/videoPlayerTextColor</item> <!-- Menu Text Color -->
+    </style>
+
     <style name="MLPTheme_Rarity" parent="AppTheme" >
         <item name="colorPrimaryDark">@color/colorMLPPALLETE_RarityTheme_mane_Stroke</item>
         <item name="colorPrimary">@color/colorMLPPALLETE_RarityTheme_mane_Dark</item>
@@ -45,6 +57,10 @@
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
+    <style name="MLPTheme_Rarity_Player" parent="MLPTheme_Rarity" >
+        <item name="android:textColor">@color/videoPlayerTextColor</item> <!-- Menu Text Color -->
+    </style>
+
     <style name="MLPTheme_FluterShy" parent="AppTheme" >
         <item name="colorPrimaryDark">@color/colorMLPPALLETE_FlutterShyTheme_mane_Stroke</item>
         <item name="colorPrimary">@color/colorMLPPALLETE_FlutterShyTheme_body_stroke</item>
@@ -53,6 +69,10 @@
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
+    <style name="MLPTheme_FluterShy_Player" parent="MLPTheme_FluterShy" >
+        <item name="android:textColor">@color/videoPlayerTextColor</item> <!-- Menu Text Color -->
+    </style>
+
     <style name="MLPTheme_RainBowDash" parent="AppTheme" >
         <item name="colorPrimaryDark">@color/colorMLPPALLETE_RainbowDashTheme_mane_Light</item>
         <item name="colorPrimary">@color/colorMLPPALLETE_RainbowDashTheme_mane_Dark</item>
@@ -61,6 +81,10 @@
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
+    <style name="MLPTheme_RainBowDash_Player" parent="MLPTheme_RainBowDash" >
+        <item name="android:textColor">@color/videoPlayerTextColor</item> <!-- Menu Text Color -->
+    </style>
+
     <style name="MLPTheme_Spike" parent="AppTheme" >
         <item name="colorPrimaryDark">@color/colorMLPPALLETE_SpikeTheme_mane_Dark</item>
         <item name="colorPrimary">@color/colorMLPPALLETE_SpikeTheme_mane_Darker</item>
@@ -69,6 +93,10 @@
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
+    <style name="MLPTheme_Spike_Player" parent="MLPTheme_Spike" >
+        <item name="android:textColor">@color/videoPlayerTextColor</item> <!-- Menu Text Color -->
+    </style>
+
     <style name="MLPTheme_Luna" parent="AppTheme" >
         <item name="colorPrimaryDark">@color/colorMLPPALLETE_LunaTheme_body_stroke</item>
         <item name="colorPrimary">@color/colorMLPPALLETE_LunaTheme_mane_Dark</item>
@@ -81,6 +109,9 @@
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
+    <style name="MLPTheme_Luna_Player" parent="MLPTheme_Luna" >
+        <item name="android:textColor">@color/videoPlayerTextColor</item> <!-- Menu Text Color -->
+    </style>
 
     <style name="MLPTheme_Celestia" parent="AppTheme" >
         <item name="colorPrimaryDark">@color/colorMLPPALLETE_CelestiaTheme_cutieMark_color1</item>
@@ -89,6 +120,9 @@
         <item name="android:colorBackground">@color/colorMLPPALLETE_CelestiaTheme_body_main</item>
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
+    <style name="MLPTheme_Celestia_Player" parent="MLPTheme_Celestia" >
+        <item name="android:textColor">@color/videoPlayerTextColor</item> <!-- Menu Text Color -->
     </style>
 
     <style name="MLPTheme_KingSombra" parent="AppTheme" >
@@ -103,6 +137,10 @@
         <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
+    <style name="MLPTheme_KingSombra_Player" parent="MLPTheme_KingSombra" >
+        <item name="android:textColor">@color/videoPlayerTextColor</item> <!-- Menu Text Color -->
+    </style>
+
 
     <style name="AlertDialogCustom" parent="@android:style/Theme.DeviceDefault.Light.Dialog">
         <item name="android:textColor">#ee000000</item>

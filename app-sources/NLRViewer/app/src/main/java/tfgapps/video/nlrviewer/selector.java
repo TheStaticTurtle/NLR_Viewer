@@ -51,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -60,7 +61,7 @@ import java.util.logging.Logger;
 
 public class selector extends AppCompatActivity {
 
-    String CURRENTREVISION = "nlr_viewer.v1.2.6.apk";
+    String CURRENTREVISION = "nlr_viewer.v1.2.7.apk";
     boolean DEBUGMODE = false;
     MLP_Content NLRVIDEOCONTENT;
     NLR_Content NLRCONTENT;
@@ -1230,7 +1231,7 @@ public class selector extends AppCompatActivity {
                                     Bundle b = new Bundle();
                                     b.putString("vidurl",vidurl); //Your id
                                     b.putString("suburl",suburl); //Your id
-                                    b.putInt("theme",getAppTheme()); //Your id
+                                    b.putInt("theme",getAppThemeForPlayer()); //Your id
                                     b.putString("title",selectedFilm.title); //Your id
                                     myIntent.putExtras(b);
                                     startActivity(myIntent);
@@ -1261,6 +1262,7 @@ public class selector extends AppCompatActivity {
         }).start();
     }
     public void onEpisodeCLick(final ListView epList , final Spinner seList, final int position) {
+        //(new ContextThemeWrapper(selector.this, R.style.AlertDialogCustom)
         final ProgressDialog dialog = ProgressDialog.show(new ContextThemeWrapper(selector.this, R.style.AlertDialogCustom), "Loading", "Please wait...", true);
         dialog.setCancelable(false);
         new Thread(new Runnable() {
@@ -1334,7 +1336,7 @@ public class selector extends AppCompatActivity {
                                     Bundle b = new Bundle();
                                     b.putString("vidurl",vidurl); //Your id
                                     b.putString("suburl",suburl); //Your id
-                                    b.putInt("theme",getAppTheme()); //Your id
+                                    b.putInt("theme",getAppThemeForPlayer()); //Your id
                                     b.putString("title",clickedEpisode.title); //Your id
                                     myIntent.putExtras(b);
                                     startActivity(myIntent);
@@ -1447,7 +1449,7 @@ public class selector extends AppCompatActivity {
                                     Bundle b = new Bundle();
                                     b.putString("vidurl",vidurl); //Your id
                                     b.putString("suburl",suburl); //Your id
-                                    b.putInt("theme",getAppTheme()); //Your id
+                                    b.putInt("theme",getAppThemeForPlayer()); //Your id
                                     b.putString("title",clickedEpisode.title); //Your id
                                     myIntent.putExtras(b);
                                     startActivity(myIntent);
@@ -1495,6 +1497,17 @@ public class selector extends AppCompatActivity {
             Log.e("getAppTheme","FUCKITTHISISTOOCOMPLICATED_IRAGEQUIT",e);
             return R.style.FullscreenTheme;
         }
+    }
+    public int getAppThemeForPlayer() {
+        String appThemeStr = getResources().getResourceEntryName(getAppTheme());
+        String appPlayerThemeStr = appThemeStr + "_Player";
+        int appPlayerThemeId = R.style.MLPTheme_KingSombra_Player;
+        try {
+            appPlayerThemeId = getResources().getIdentifier(appPlayerThemeStr, "style", getPackageName());
+        } catch (Exception e) {
+            Log.e("GetAppThmeForPlayer","?",e);
+        }
+        return appPlayerThemeId;
     }
     public void sendBugReport() {
         String title = "[NLRViewer] new bug: " + ((TextView) findViewById(R.id.sendmail_MsgTitle)).getText().toString();
@@ -1855,9 +1868,14 @@ public class selector extends AppCompatActivity {
                                 builder.show();
                             }
                         });
+                    } else {
+                        if(DEBUGMODE) {
+                            Toast.makeText(getApplication(), "Woaw you're running in debug mode", Toast.LENGTH_LONG).show();
+                        }
                     }
                 } catch (Exception e) {
                     Log.e("CheckUrl", "Thread", e);
+                    Toast.makeText(getApplication(), "Error:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         }).start();

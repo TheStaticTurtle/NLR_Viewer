@@ -8,7 +8,7 @@
     <color name="episode_NOTreleasedColor">#22FF0000</color>
     <color name="episode_embededColor">#22ff9d60</color>
     <color name="subsColor_color">#ffffffff</color>
-
+    <color name="videoPlayerTextColor">#ff000000</color>
 
     <!--
     <color name="colorMLPPALLETE__mane_Dark">#</color>

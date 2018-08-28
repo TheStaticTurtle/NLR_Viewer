@@ -1,14 +1,19 @@
 package tfgapps.video.nlrviewer;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.graphics.SurfaceTexture;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.view.menu.MenuBuilder;
 import android.text.Layout;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -30,22 +35,9 @@ import java.net.ProtocolException;
  * status bar and navigation/system bar) with user interaction.
  */
 public class VideoPlayerV2 extends AppCompatActivity {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
+
     private static final boolean AUTO_HIDE = true;
-
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-    /**
-     * Some older devices needs a small delay between UI widget updates
-     * and a change of the status and navigation bar.
-     */
+    private static final int AUTO_HIDE_DELAY_MILLIS = 2000;
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private BetterVideoPlayer mBetterVideoPlayer;
@@ -114,13 +106,12 @@ public class VideoPlayerV2 extends AppCompatActivity {
 
         Log.wtf("videosub",suburl);
         setTheme(theme);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player_v2);
 
         mBetterVideoPlayer = (BetterVideoPlayer) findViewById(R.id.bvp);
-
-        setupPlayer(vidurl,suburl,title,0);
+        mBetterVideoPlayer.setLoadingStyle(9);
+        setupPlayer(vidurl,suburl,title,0,true);
 
         // Set up the user interaction to manually show or hide the system UI.
         /*mBetterVideoPlayer.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +130,9 @@ public class VideoPlayerV2 extends AppCompatActivity {
     int IMAt=0;
     int IMAt_old=0;
     int RescaleCouter=0;
-    void setupPlayer(final String v,final String u,String t, final int start) {
+
+    @SuppressLint("RestrictedApi")
+    void setupPlayer(final String v,final String u,String t, final int start, boolean oncreate) {
         RescaleCouter=0;
         String vidurl =v;
         String suburl =u;
@@ -151,12 +144,15 @@ public class VideoPlayerV2 extends AppCompatActivity {
         mBetterVideoPlayer.setInitialPosition(start);
         mBetterVideoPlayer.setSource(Uri.parse(vidurl));
         mBetterVideoPlayer.enableSwipeGestures(getWindow());
-        mBetterVideoPlayer.enableDoubleTapGestures(getResources().getInteger(R.integer.video_DoubleTapSeekToXMs));
-        if(suburl.contains("http://") || suburl.contains("https://")) {
-            mBetterVideoPlayer.setCaptions(Uri.parse(suburl), CaptionsView.CMime.SUBRIP);
-            mBetterVideoPlayer.getToolbar().inflateMenu(R.menu.activity_videoplayer_menu_sub);
-        } else {
-            mBetterVideoPlayer.getToolbar().inflateMenu(R.menu.activity_videoplayer_menu_nosub);
+        //mBetterVideoPlayer.enableDoubleTapGestures(getResources().getInteger(R.integer.video_DoubleTapSeekToXMs));
+        if(oncreate) {
+            if (suburl.contains("http://") || suburl.contains("https://")) {
+                mBetterVideoPlayer.setCaptions(Uri.parse(suburl), CaptionsView.CMime.SUBRIP);
+                mBetterVideoPlayer.getToolbar().inflateMenu(R.menu.activity_videoplayer_menu_sub);
+            } else {
+                mBetterVideoPlayer.getToolbar().inflateMenu(R.menu.activity_videoplayer_menu_nosub);
+                mBetterVideoPlayer.getToolbar().setPopupTheme(R.style.AlertDialogCustom);
+            }
         }
         final String suburlF=suburl;
         final String vidurlF=vidurl;
@@ -196,7 +192,7 @@ public class VideoPlayerV2 extends AppCompatActivity {
             @Override public void onStarted(BetterVideoPlayer player) { rescalePlayer(player);  Log.i("mBetterVideoPlayer", "onStarted");  }
             @Override public void onPaused(BetterVideoPlayer player) { rescalePlayer(player); Log.i("mBetterVideoPlayer", "onPaused");  }
             @Override public void onPreparing(BetterVideoPlayer player) { Log.i("mBetterVideoPlayer", "onPreparing"); }
-            @Override public void onPrepared(BetterVideoPlayer player) {    Log.i("mBetterVideoPlayer", "onPrepared"); player.seekTo(start); /*TODO: Auto scale video*/ }
+            @Override public void onPrepared(BetterVideoPlayer player) {    Log.i("mBetterVideoPlayer", "onPrepared"); player.seekTo(start);  }
             @Override public void onBuffering(int percent) {
                 Log.i("mBetterVideoPlayer", "onBuffering: "+percent+"%");
                 if(RescaleCouter == 0) {
@@ -208,44 +204,36 @@ public class VideoPlayerV2 extends AppCompatActivity {
                     if(RescaleCouter>2) {RescaleCouter=0;} else { Log.d("mBetterVideoPlayer", "notRescalingYet: "+RescaleCouter); }
                 }
             }
-
-            @Override
-            public void onError(BetterVideoPlayer player, Exception e) {
+            @Override public void onError(BetterVideoPlayer player, Exception e) {
                 //Log.i(TAG, "Error " +e.getMessage());
                 if(e.getMessage().contains("died")) {
                     Log.wtf("OnError",e);
                     Log.e("VideoPlayerV2","ServerDied error restarting at currentpos:"+IMAt);
                     Toast to = Toast.makeText(VideoPlayerV2.this ,getResources().getString(R.string.video_reloaderror),Toast.LENGTH_LONG);
                     to.show();
-                    setupPlayer(vidurlF,suburlF,t,IMAt);
+                    setupPlayer(vidurlF,suburlF,t,IMAt,false);
                     hide();
                 }
             }
-
-            @Override
-            public void onCompletion(BetterVideoPlayer player) {
+            @Override public void onCompletion(BetterVideoPlayer player) {
                 if(player.getCurrentPosition()+2000 < player.getDuration()) {
                     Log.e("VideoPlayerV2","onCompletion: currentPos != duration restarting at currentpos:"+IMAt+" /"+player.getDuration());
                     Toast to = Toast.makeText(VideoPlayerV2.this ,getResources().getString(R.string.video_reloaderror),Toast.LENGTH_LONG);
                     to.show();
                     int wasAt = player.getCurrentPosition();
-                    setupPlayer(vidurlF,suburlF,t,IMAt-2);
+                    setupPlayer(vidurlF,suburlF,t,IMAt-2,false);
                     hide();
                     return;
                 }
                 Log.i("mBetterVideoPlayer", "onCompletion");
             }
-
-            @Override
-            public void onToggleControls(BetterVideoPlayer player, boolean isShowing) {
+            @Override public void onToggleControls(BetterVideoPlayer player, boolean isShowing) {
                 rescalePlayer(player);
             }
-
         });
 
         mBetterVideoPlayer.getToolbar().setTitle(title);
-        mBetterVideoPlayer.getToolbar()
-                .setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
+        mBetterVideoPlayer.getToolbar().setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
         mBetterVideoPlayer.getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -255,9 +243,13 @@ public class VideoPlayerV2 extends AppCompatActivity {
     }
 
     void rescalePlayer(BetterVideoPlayer player) {
-        FrameLayout lay = findViewById(R.id.layout);
-        TextureView tex = findViewById(R.id.scaleThisFuckingVideo);
-        player.onSurfaceTextureSizeChanged(tex.getSurfaceTexture(),lay.getWidth(),lay.getHeight());
+        try {
+            FrameLayout lay = findViewById(R.id.layout);
+            TextureView tex = findViewById(R.id.scaleThisFuckingVideo);
+            player.onSurfaceTextureSizeChanged(tex.getSurfaceTexture(), lay.getWidth(), lay.getHeight());
+        } catch (Exception e) {
+            Log.e("VideoPlayerV2","rescaleplayer",e);
+        }
     }
 
     @Override

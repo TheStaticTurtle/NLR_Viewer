@@ -19,6 +19,6 @@
         android:gravity="center"
         android:keepScreenOn="true"
         bvp:bvp_autoPlay="true"
-        bvp:bvp_captionColor="@color/subsColor_color" />
+        bvp:bvp_captionColor="@color/subsColor_color"/>
 
 </FrameLayout>

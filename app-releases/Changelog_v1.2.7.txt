@@ -1,0 +1,7 @@
+v1.2.7:
+	VideoPlayer:
+		- Enabled swipe gesture
+		- Fixed multiple entries in menu when video restart
+		- Fixed white on white text color from theme
+		- Fixed auto-hide not working
+		- Changed loading style from ThreeDot to FadingCircle
