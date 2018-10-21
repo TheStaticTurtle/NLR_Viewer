@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">New lunar republic</string>
+    <string name="app_name">New Lunar Republic</string>
     <string name="title_activity_video_player">VideoPlayer</string>
     <string name="title_activity_send_mail">Reporter un bug</string>
 
@@ -65,14 +65,14 @@
 
 
     <string name="aboutdev_title">A propos du dev</string>
-    <string name="aboutdev_by">Application developer par turtleforgaming</string>
+    <string name="aboutdev_by">Application développée par Turtleforgaming</string>
     <string name="aboutdev_web" translatable="false">http://tfg.tugler.fr/</string>
     <string name="aboutdev_github" translatable="false">https://github.com/TurtleForGaming</string>
     <string name="aboutdev_mail" translatable="false">turtleforgamingapps@gmail.com</string>
     <string name="aboutdev_ppal" translatable="false">https://paypal.me/samytheturtle</string>
     <string name="aboutdev_btc" translatable="false">BTC: 36S5yRte2GZFX4R8xA3EKDhmwTka9vJDBx</string>
     <string name="aboutdev_copiedtoclip">Copier dans le presse papier</string>
-    <string name="aboutdev_appapps">Comment j\'ai coder cette app</string>
+    <string name="aboutdev_appapps">Comment j\'ai codé cette app</string>
 
     <string name="title_activity_video_player_v2">VideoPlayerV2</string>
     <string name="title_activity_video_player_activatesubs">Activer les sous-titres</string>
@@ -90,6 +90,7 @@
     <string name="menu_settings">Parametres</string>
     <string-array name="menu_setting_styles">
         <item>Default</item>
+        <item>Random</item>
         <item>Twilight Sparkle</item>
         <item>Apple Jack</item>
         <item>Pinkie Pie</item>

@@ -1,3 +1,9 @@
+v1.2.8:
+	selector:
+		- Fixed player always using FR Subtitles
+		- Added random theme selector
+		- Spellcheck
+
 v1.2.7:
 	VideoPlayer:
 		- Enabled swipe gesture

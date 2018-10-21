@@ -30,8 +30,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -48,9 +50,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -61,7 +67,7 @@ import java.util.logging.Logger;
 
 public class selector extends AppCompatActivity {
 
-    String CURRENTREVISION = "nlr_viewer.v1.2.7.apk";
+    String CURRENTREVISION = "nlr_viewer.v1.2.8.apk";
     boolean DEBUGMODE = false;
     MLP_Content NLRVIDEOCONTENT;
     NLR_Content NLRCONTENT;
@@ -1328,9 +1334,7 @@ public class selector extends AppCompatActivity {
                                     String text = subs.get(i);
                                     if(text == "None") { suburl = "none"; }
                                     if(text == "SUB FR") { suburl = clickedEpisode.url_sub_fr; }
-                                    if(text == "SUB EN") { suburl = clickedEpisode.url_sub_fr; }
-
-
+                                    if(text == "SUB EN") { suburl = clickedEpisode.url_sub_en; }
 
                                     Intent myIntent = new Intent(selector.this, VideoPlayerV2.class);
                                     Bundle b = new Bundle();
@@ -1640,13 +1644,21 @@ public class selector extends AppCompatActivity {
         Spinner LangSelector = findViewById(R.id.config_spinner_lang);
         Button saveBtn = findViewById(R.id.config_btn_save);
 
-        int toSelectItem = spinner_wereis(ThemeSelector,getConfig_getTheme());
+        int toSelectItem = spinner_wereis(ThemeSelector,getConfig_getThemeConf());
         if(toSelectItem==-1) {toSelectItem=0;}
         ThemeSelector.setSelection(toSelectItem);
         ThemeSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                writeConfig_writeTheme(ThemeSelector.getItemAtPosition(i).toString());
+                String selected = ThemeSelector.getItemAtPosition(i).toString();
+                if (selected.equals("Random")) {
+                    findViewById(R.id.layout_randomthemeselector).setVisibility(View.VISIBLE);
+                    writeConfig_writeTheme("Random");
+                } else {
+                    findViewById(R.id.layout_randomthemeselector).setVisibility(View.GONE);
+                    writeConfig_writeTheme(selected);
+                }
+
             }
 
             @Override
@@ -1673,6 +1685,30 @@ public class selector extends AppCompatActivity {
                 restartApp();
             }
         });
+
+        Switch themeRandomDefault  = findViewById(R.id.switch_theme_random_default);
+        Switch themeRandomTwilight = findViewById(R.id.switch_theme_random_twilight);
+        Switch themeRandomApple    = findViewById(R.id.switch_theme_random_apple);
+        Switch themeRandomPinkie   = findViewById(R.id.switch_theme_random_pinkie);
+        Switch themeRandomRarity   = findViewById(R.id.switch_theme_random_rarity);
+        Switch themeRandomFlutter  = findViewById(R.id.switch_theme_random_flutter);
+        Switch themeRandomRainbow  = findViewById(R.id.switch_theme_random_rainbow);
+        Switch themeRandomSpike    = findViewById(R.id.switch_theme_random_spike);
+        Switch themeRandomLuna     = findViewById(R.id.switch_theme_random_luna);
+        Switch themeRandomCelestia = findViewById(R.id.switch_theme_random_celestia);
+        Switch themeRandomKingSombra = findViewById(R.id.switch_theme_random_kingsombra);
+        themeRandomDefault.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        themeRandomTwilight.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        themeRandomApple.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        themeRandomPinkie.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        themeRandomRarity.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        themeRandomFlutter.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        themeRandomRainbow.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        themeRandomSpike.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        themeRandomLuna.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        themeRandomCelestia.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        themeRandomKingSombra.setOnClickListener(new View.OnClickListener() { @Override  public void onClick(View view) {  writeConfig_randomThemes(); } });
+        updateSwitches();
     }
 
     public String translateLang_toCodeName(String full) {
@@ -1705,6 +1741,50 @@ public class selector extends AppCompatActivity {
         res.updateConfiguration(conf, dm);
     }
 
+    public void updateSwitches() {
+        SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_theme", MODE_PRIVATE);
+        Set<String> set = new HashSet<String>(); set.add("Default");
+        Set<String> randomSelected = sharedPreferences.getStringSet("appthemerandom",set);
+        List<String> list = new ArrayList<String>(randomSelected);
+
+        Switch themeRandomDefault = findViewById(R.id.switch_theme_random_default);
+        Switch themeRandomTwilight = findViewById(R.id.switch_theme_random_twilight);
+        Switch themeRandomApple = findViewById(R.id.switch_theme_random_apple);
+        Switch themeRandomPinkie = findViewById(R.id.switch_theme_random_pinkie);
+        Switch themeRandomRarity = findViewById(R.id.switch_theme_random_rarity);
+        Switch themeRandomFlutter = findViewById(R.id.switch_theme_random_flutter);
+        Switch themeRandomRainbow = findViewById(R.id.switch_theme_random_rainbow);
+        Switch themeRandomSpike = findViewById(R.id.switch_theme_random_spike);
+        Switch themeRandomLuna = findViewById(R.id.switch_theme_random_luna);
+        Switch themeRandomCelestia = findViewById(R.id.switch_theme_random_celestia);
+        Switch themeRandomKingSombra = findViewById(R.id.switch_theme_random_kingsombra);
+
+        themeRandomDefault.setChecked(false);
+        themeRandomTwilight.setChecked(false);
+        themeRandomApple.setChecked(false);
+        themeRandomPinkie.setChecked(false);
+        themeRandomRarity.setChecked(false);
+        themeRandomFlutter.setChecked(false);
+        themeRandomRainbow.setChecked(false);
+        themeRandomSpike.setChecked(false);
+        themeRandomLuna.setChecked(false);
+        themeRandomCelestia.setChecked(false);
+        themeRandomKingSombra.setChecked(false);
+
+        for(String k : list) {
+            if(k.equals("Default")) { themeRandomDefault.setChecked(true); }
+            if(k.equals("Twilight Sparke")) { themeRandomTwilight.setChecked(true); }
+            if(k.equals("Apple Jack")) { themeRandomApple.setChecked(true); }
+            if(k.equals("Pinkie Pie")) { themeRandomPinkie.setChecked(true); }
+            if(k.equals("Rarity")) { themeRandomRarity.setChecked(true); }
+            if(k.equals("Flutter Shy")) { themeRandomFlutter.setChecked(true); }
+            if(k.equals("Rainbow Dash")) { themeRandomRainbow.setChecked(true); }
+            if(k.equals("Spike")) { themeRandomSpike.setChecked(true); }
+            if(k.equals("Luna")) { themeRandomLuna.setChecked(true); }
+            if(k.equals("Celestia")) { themeRandomCelestia.setChecked(true); }
+            if(k.equals("King Sombra")) { themeRandomKingSombra.setChecked(true); }
+        }
+    }
     public void writeConfig_writeLang(String theme) {
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_theme", MODE_PRIVATE);
         sharedPreferences.edit()
@@ -1717,10 +1797,56 @@ public class selector extends AppCompatActivity {
                 .putString("apptheme",theme)
                 .apply();
     }
-    public String getConfig_getTheme() {
+    public void writeConfig_randomThemes() {
+        Switch themeRandomDefault  = findViewById(R.id.switch_theme_random_default);
+        Switch themeRandomTwilight = findViewById(R.id.switch_theme_random_twilight);
+        Switch themeRandomApple    = findViewById(R.id.switch_theme_random_apple);
+        Switch themeRandomPinkie   = findViewById(R.id.switch_theme_random_pinkie);
+        Switch themeRandomRarity   = findViewById(R.id.switch_theme_random_rarity);
+        Switch themeRandomFlutter  = findViewById(R.id.switch_theme_random_flutter);
+        Switch themeRandomRainbow  = findViewById(R.id.switch_theme_random_rainbow);
+        Switch themeRandomSpike    = findViewById(R.id.switch_theme_random_spike);
+        Switch themeRandomLuna     = findViewById(R.id.switch_theme_random_luna);
+        Switch themeRandomCelestia = findViewById(R.id.switch_theme_random_celestia);
+        Switch themeRandomKingSombra = findViewById(R.id.switch_theme_random_kingsombra);
+        ArrayList<String> arr = new ArrayList<>();
+        Set<String> set = new HashSet<String>();
+        if(themeRandomDefault.isChecked()) { set.add("Default"); }
+        if(themeRandomTwilight.isChecked()) { set.add("Twilight Sparke"); }
+        if(themeRandomApple.isChecked()) { set.add("Apple Jack"); }
+        if(themeRandomPinkie.isChecked()) { set.add("Pinkie Pie"); }
+        if(themeRandomRarity.isChecked()) { set.add("Rarity"); }
+        if(themeRandomFlutter.isChecked()) { set.add("Flutter Shy"); }
+        if(themeRandomRainbow.isChecked()) { set.add("Rainbow Dash"); }
+        if(themeRandomSpike.isChecked()) { set.add("Spike"); }
+        if(themeRandomLuna.isChecked()) { set.add("Luna"); }
+        if(themeRandomCelestia.isChecked()) { set.add("Celestia"); }
+        if(themeRandomKingSombra.isChecked()) { set.add("King Sombra"); }
+        SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_theme", MODE_PRIVATE);
+        sharedPreferences.edit()
+                .putStringSet("appthemerandom",set)
+                .apply();
+    }
+    public String getConfig_getThemeConf() {
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_theme", MODE_PRIVATE);
         String value = sharedPreferences.getString("apptheme","Default");
         return value;
+    }
+    public String getConfig_getTheme() {
+        SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_theme", MODE_PRIVATE);
+        String value = sharedPreferences.getString("apptheme","Default");
+        Set<String> set = new HashSet<String>();
+        set.add("Default");
+        Set<String> randomSelected = sharedPreferences.getStringSet("appthemerandom",set);
+        if(value.equals("Random")) {
+            List<String> list = new ArrayList<String>(randomSelected);
+            String newtheme = getRandomChestItem(list);
+            value = newtheme;
+        }
+        return value;
+    }
+    public static String getRandomChestItem(List<String> items) {
+        return items.get(new Random().nextInt(items.size()));
     }
     public String getConfig_getLang() {
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_theme", MODE_PRIVATE);

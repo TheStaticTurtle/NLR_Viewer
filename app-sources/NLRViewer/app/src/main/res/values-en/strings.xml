@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">New lunar republic</string>
+    <string name="app_name">New Lunar Republic</string>
     <string name="title_activity_video_player">VideoPlayer</string>
     <string name="title_activity_send_mail">Report a bug</string>
 

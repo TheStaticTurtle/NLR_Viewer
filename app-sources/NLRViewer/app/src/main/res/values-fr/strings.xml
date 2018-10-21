@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">New lunar republic</string>
+    <string name="app_name">New Lunar Republic</string>
     <string name="title_activity_video_player">VideoPlayer</string>
     <string name="title_activity_send_mail">Reporter un bug</string>
 
     <string name="navigation_drawer_open">Ouvrir la navigation</string>
-    <string name="navigation_drawer_close">Fermer la naigation</string>
+    <string name="navigation_drawer_close">Fermer la navigation</string>
 
     <string name="display_season">Saison</string>
     <string name="display_episode">Episode</string>
@@ -57,9 +57,9 @@
 
 
     <string name="aboutdev_title">A propos du dev</string>
-    <string name="aboutdev_by">Application developer par turtleforgaming</string>
+    <string name="aboutdev_by">Application développée par Turtleforgaming</string>
     <string name="aboutdev_copiedtoclip">Copier dans le presse papier</string>
-    <string name="aboutdev_appapps">Comment j\'ai coder cette app</string>
+    <string name="aboutdev_appapps">Comment j\'ai codé cette app</string>
 
     <string name="title_activity_video_player_v2">VideoPlayerV2</string>
     <string name="title_activity_video_player_activatesubs">Activer les sous-titres</string>
