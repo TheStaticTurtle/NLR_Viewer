@@ -1840,6 +1840,12 @@ public class selector extends AppCompatActivity {
         Set<String> randomSelected = sharedPreferences.getStringSet("appthemerandom",set);
         if(value.equals("Random")) {
             List<String> list = new ArrayList<String>(randomSelected);
+            if(list.size() == 0) {
+                list.add("Default");
+                Set<String> sett = new HashSet<String>();
+                sett.add("Default");
+                getBaseContext().getSharedPreferences("app_theme", MODE_PRIVATE).edit().putStringSet("appthemerandom",sett).apply();
+            }
             String newtheme = getRandomChestItem(list);
             value = newtheme;
         }
