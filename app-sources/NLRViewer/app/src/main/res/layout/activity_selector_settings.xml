@@ -74,7 +74,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/config_spinner_theme">
@@ -84,77 +84,88 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: Default" />
+            android:text="Theme random: Default"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/switch_theme_random_twilight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: Twilight Sparkle" />
+            android:text="Theme random: Twilight Sparkle"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/switch_theme_random_apple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: Apple Jack" />
+            android:text="Theme random: Apple Jack"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/switch_theme_random_pinkie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: Pinkie Pie" />
+            android:text="Theme random: Pinkie Pie"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/switch_theme_random_rarity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: Rarity" />
+            android:text="Theme random: Rarity"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/switch_theme_random_flutter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: Flutter Shy" />
+            android:text="Theme random: Flutter Shy"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/switch_theme_random_rainbow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: Rainbow Dash" />
+            android:text="Theme random: Rainbow Dash"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/switch_theme_random_spike"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: Spike" />
+            android:text="Theme random: Spike"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/switch_theme_random_luna"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: Luna" />
+            android:text="Theme random: Luna"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/switch_theme_random_celestia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: Celestia" />
+            android:text="Theme random: Celestia"
+            android:textColor="?android:attr/textColorPrimary" />
 
         <Switch
             android:id="@+id/switch_theme_random_kingsombra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme random: King Sombra" />
+            android:text="Theme random: King Sombra"
+            android:textColor="?android:attr/textColorPrimary" />
 
     </LinearLayout>
 
