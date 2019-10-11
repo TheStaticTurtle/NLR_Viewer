@@ -5,12 +5,12 @@ import android.graphics.Color;
 import android.graphics.SurfaceTexture;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuBuilder;
 import android.text.Layout;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -23,10 +23,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.halilibo.bettervideoplayer.BetterVideoCallback;
-import com.halilibo.bettervideoplayer.BetterVideoPlayer;
-import com.halilibo.bettervideoplayer.BetterVideoProgressCallback;
-import com.halilibo.bettervideoplayer.subtitle.CaptionsView;
+import com.halilibo.bvpkotlin.BetterVideoPlayer;
+import com.halilibo.bvpkotlin.VideoCallback;
+import com.halilibo.bvpkotlin.VideoProgressCallback;
+import com.halilibo.bvpkotlin.captions.CaptionsView;
 
 import java.net.ProtocolException;
 
@@ -110,7 +110,8 @@ public class VideoPlayerV2 extends AppCompatActivity {
         setContentView(R.layout.activity_video_player_v2);
 
         mBetterVideoPlayer = (BetterVideoPlayer) findViewById(R.id.bvp);
-        mBetterVideoPlayer.setLoadingStyle(9);
+        //mBetterVideoPlayer.setLoadingStyle(9);
+
         setupPlayer(vidurl,suburl,title,0,true);
 
         // Set up the user interaction to manually show or hide the system UI.
@@ -147,7 +148,7 @@ public class VideoPlayerV2 extends AppCompatActivity {
         //mBetterVideoPlayer.enableDoubleTapGestures(getResources().getInteger(R.integer.video_DoubleTapSeekToXMs));
         if(oncreate) {
             if (suburl.contains("http://") || suburl.contains("https://")) {
-                mBetterVideoPlayer.setCaptions(Uri.parse(suburl), CaptionsView.CMime.SUBRIP);
+                mBetterVideoPlayer.setCaptions(Uri.parse(suburl), CaptionsView.SubMime.SUBRIP);
                 mBetterVideoPlayer.getToolbar().inflateMenu(R.menu.activity_videoplayer_menu_sub);
             } else {
                 mBetterVideoPlayer.getToolbar().inflateMenu(R.menu.activity_videoplayer_menu_nosub);
@@ -157,12 +158,12 @@ public class VideoPlayerV2 extends AppCompatActivity {
         final String suburlF=suburl;
         final String vidurlF=vidurl;
 
-        mBetterVideoPlayer.getToolbar().setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
+        mBetterVideoPlayer.getToolbar().setOnMenuItemClickListener(new androidx.appcompat.widget.Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_vid_activateSubs:
-                        if(suburl.contains("http://") || suburl.contains("https://")) { mBetterVideoPlayer.setCaptions(Uri.parse(suburlF), CaptionsView.CMime.SUBRIP); }
+                        if(suburl.contains("http://") || suburl.contains("https://")) { mBetterVideoPlayer.setCaptions(Uri.parse(suburlF), CaptionsView.SubMime.SUBRIP); }
                         break;
                     case R.id.nav_vid_desactivateSubs:
                         mBetterVideoPlayer.removeCaptions();
@@ -178,9 +179,10 @@ public class VideoPlayerV2 extends AppCompatActivity {
                 return false;
             }
         });
-        mBetterVideoPlayer.setProgressCallback(new BetterVideoProgressCallback() {
+
+        mBetterVideoPlayer.setProgressCallback(new VideoProgressCallback() {
             @Override
-            public void onVideoProgressUpdate(int position, int duration) {
+            public void onProgressUpdate(int position, int duration) {
                 if(position > IMAt_old) {
                     IMAt = position;
                     IMAt_old = position;
@@ -188,7 +190,7 @@ public class VideoPlayerV2 extends AppCompatActivity {
                 }
             }
         });
-        mBetterVideoPlayer.setCallback(new BetterVideoCallback() {
+        mBetterVideoPlayer.setCallback(new VideoCallback() {
             @Override public void onStarted(BetterVideoPlayer player) { rescalePlayer(player);  Log.i("mBetterVideoPlayer", "onStarted");  }
             @Override public void onPaused(BetterVideoPlayer player) { rescalePlayer(player); Log.i("mBetterVideoPlayer", "onPaused");  }
             @Override public void onPreparing(BetterVideoPlayer player) { Log.i("mBetterVideoPlayer", "onPreparing"); }
@@ -233,7 +235,7 @@ public class VideoPlayerV2 extends AppCompatActivity {
         });
 
         mBetterVideoPlayer.getToolbar().setTitle(title);
-        mBetterVideoPlayer.getToolbar().setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
+        mBetterVideoPlayer.getToolbar().setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material);
         mBetterVideoPlayer.getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

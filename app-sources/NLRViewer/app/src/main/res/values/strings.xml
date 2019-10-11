@@ -19,22 +19,27 @@
     <string name="about_title">A Propos</string>
     <string name="aboutapp_text">
         Utilisation des api suivates: \n
-        com.squareup.picasso:picasso:2.71828  \n
-        org.jsoup:jsoup:1.11.3  \n
-        com.github.ybq:Android-SpinKit:1.1.0  \n
-        com.github.halilozercan:BetterVideoPlayer:1.2.alpha1  \n
-        com.android.support:customtabs:25.1.0+  \n
+         - com.squareup.picasso:picasso:2.71828  \n
+         - org.jsoup:jsoup:1.11.3  \n
+         - com.github.ybq:Android-SpinKit:1.1.0  \n
+         - com.github.halilozercan:BetterVideoPlayer:1.2.alpha1  \n
+         - com.android.support:customtabs:25.1.0+  \n
         \n
         Recuperation des information:\n
-        https://newlunarrepublic.fr/api/news  \n
-        https://newlunarrepublic.fr/api/episodes  \n
-        https://newlunarrepublic.fr/api/films  \n
-        https://newlunarrepublic.fr/api/comics  \n
-        https://newlunarrepublic.fr/api/recrutement  \n
-        https://newlunarrepublic.fr/api/bonus  \n
+         - https://newlunarrepublic.fr/api/news  \n
+         - https://newlunarrepublic.fr/api/episodes  \n
+         - https://newlunarrepublic.fr/api/films  \n
+         - https://newlunarrepublic.fr/api/comics  \n
+         - https://newlunarrepublic.fr/api/recrutement  \n
+         - https://newlunarrepublic.fr/api/bonus  \n
         \n
-        Color palete: \n
-        https://www.deviantart.com/midnightblitzz/
+        Palette de couleurs: \n
+         - https://www.deviantart.com/midnightblitzz/ \n
+        \n
+        Donner envoyée vers google analytics:\n
+         - Click sur un Episode / Film / Comic \n
+         - Ouverture application \n
+         - Temps d\u0027utilisation / Watch time \n
     </string>
 
     <string name="drawer_bugreport">Reporter un bug</string>
@@ -64,26 +69,30 @@
     <string name="drawer_comicfr">Comics FR</string>
 
 
-    <string name="aboutdev_title">A propos du dev</string>
+    <string name="aboutdev_title">A propos du dev / App</string>
     <string name="aboutdev_by">Application développée par Turtleforgaming</string>
-    <string name="aboutdev_web" translatable="false">http://tfg.tugler.fr/</string>
+    <string name="aboutdev_web" translatable="false">http://samuel.tugler.fr/</string>
     <string name="aboutdev_github" translatable="false">https://github.com/TurtleForGaming</string>
-    <string name="aboutdev_mail" translatable="false">turtleforgamingapps@gmail.com</string>
-    <string name="aboutdev_ppal" translatable="false">https://paypal.me/samytheturtle</string>
-    <string name="aboutdev_btc" translatable="false">BTC: 36S5yRte2GZFX4R8xA3EKDhmwTka9vJDBx</string>
     <string name="aboutdev_copiedtoclip">Copier dans le presse papier</string>
-    <string name="aboutdev_appapps">Comment j\'ai codé cette app</string>
+    <string name="aboutdev_appapps">Information sur l\'application / GA</string>
 
     <string name="title_activity_video_player_v2">VideoPlayerV2</string>
     <string name="title_activity_video_player_activatesubs">Activer les sous-titres</string>
     <string name="title_activity_video_player_desactivatesubs">Desactiver les sous-titres</string>
-    <string name="title_activity_video_player_hideui">Cacher l\'UI</string>
+    <string name="title_activity_video_player_hideui">Cacher l\u0027UI</string>
     <string name="title_activity_video_player_rescale">Rescale</string>
     <string name="video_reloaderror">Il y a eu une erreur durant le chargement de la video.\nSi cela arrive souvent essayer de diminuer la qualitée\nLa video va redemarer</string>
 
 
     <string name="loadingscreen_initial">Le contenu vas charger sous peu.</string>
     <string name="loadingscreen_updatingviews">Affichage du contenu en cour.</string>
+    <string name="loadingscreen_updatingviews_download">Telechargement de la liste des episodes</string>
+    <string name="loadingscreen_updatingviews_episodes">Traitement des épisodes</string>
+    <string name="loadingscreen_updatingviews_films">Traitement des films</string>
+    <string name="loadingscreen_updatingviews_comics">Traitement des comics</string>
+    <string name="loadingscreen_updatingviews_allies">Traitement des alliés</string>
+    <string name="loadingscreen_updatingviews_bonus">Traitement des episodes bonus</string>
+    <string name="loadingscreen_updatingviews_news">Traitement des news</string>
 
     <string name="menu_reloadcontent">Rafraichir le contenu</string>
     <string name="menu_settings_style">Theme</string>
@@ -111,15 +120,19 @@
     <string name="menu_settings_save">Sauvegarder</string>
 
     <string name="drawer_bonus">Episodes bonus</string>
-    <string name="title_activity_azerty_todeleteazerty">azertyTODELETEazerty</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
 
-    <string name="action_example">Example action</string>
-
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Paramettres</string>
     <string name="action_newversion">Nouvelle version</string>
     <string name="action_actualversion">Version actuelle</string>
     <string name="action_newupdate">Mise a jour disponible</string>
+
+    <string name="privacy_yes">J\u0027accepte</string>
+    <string name="privacy_no">Je refuse</string>
+    <string name="privacy_title">Consentement tracking</string>
+    <string name="privacy_message">Ce message ne va s\u0027afficher qu\u0027une fois. Cette version et le prochaine contienne les analytics de google. En cliquant j\u0027accepte vous accepter l\u0027envoie des données d\u0027utilisation de l\u0027application, si vous refuser aucune donnée sera transimise</string>
+    <string name="privacy_change">Parametre de confidentialitée</string>
+
+    <string name="error_episode_notreleased">Desoler cet episode n\u0027est pas encore disponible. Date UTC de sortie: </string>
+    <string name="error_episode_notreleased_unknown">Inconnue</string>
+    <string name="error_episode_embeded">Desoler cet episode est externe a la NLR, il ne peut pas s\u0027afficher sur l\u0027application. Ouverture d\u0027un navigateur</string>
 </resources>

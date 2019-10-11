@@ -19,28 +19,34 @@
     <string name="drawer_aboutdev">About</string>
     <string name="about_title">About</string>
     <string name="aboutapp_text">
-        Api usages: \n
-        com.squareup.picasso:picasso:2.71828  \n
-        org.jsoup:jsoup:1.11.3  \n
-        com.github.ybq:Android-SpinKit:1.1.0  \n
-        com.github.halilozercan:BetterVideoPlayer:1.2.alpha1  \n
-        com.android.support:customtabs:25.1.0+  \n
+        Using these apis: \n
+         - com.squareup.picasso:picasso:2.71828  \n
+         - org.jsoup:jsoup:1.11.3  \n
+         - com.github.ybq:Android-SpinKit:1.1.0  \n
+         - com.github.halilozercan:BetterVideoPlayer:1.2.alpha1  \n
+         - com.android.support:customtabs:25.1.0+  \n
         \n
-        Information gathering:\n
-        https://newlunarrepublic.fr/api/news  \n
-        https://newlunarrepublic.fr/api/episodes  \n
-        https://newlunarrepublic.fr/api/films  \n
-        https://newlunarrepublic.fr/api/comics  \n
-        https://newlunarrepublic.fr/api/recrutement  \n
-        https://newlunarrepublic.fr/api/bonus  \n
+        Episodes retrivals:\n
+         - https://newlunarrepublic.fr/api/news  \n
+         - https://newlunarrepublic.fr/api/episodes  \n
+         - https://newlunarrepublic.fr/api/films  \n
+         - https://newlunarrepublic.fr/api/comics  \n
+         - https://newlunarrepublic.fr/api/recrutement  \n
+         - https://newlunarrepublic.fr/api/bonus  \n
         \n
         Color palete: \n
-        https://www.deviantart.com/midnightblitzz/
+         - https://www.deviantart.com/midnightblitzz/ \n
+        \n
+        Data sent to google analytics:\n
+         - Click on Episode / Film / Comic \n
+         - Application opened \n
+         - Use time / Watch time \n
     </string>
 
     <string name="drawer_bugreport">Report a bug</string>
     <string name="email_title">Title: </string>
     <string name="email_msg">Message: </string>
+    <string name="email_replyto">ReplyTo: </string>
     <string name="email_needinstall">YOu have ton install a mail client</string>
     <string name="email_sended">Send via mail</string>
     <string name="email_intentText">Send report via mail</string>
@@ -56,10 +62,10 @@
     <string name="drawer_comicfr">Comics FR</string>
 
 
-    <string name="aboutdev_title">About the dev</string>
+    <string name="aboutdev_title">About the dev / App</string>
     <string name="aboutdev_by">App developed by turtleforgaming</string>
     <string name="aboutdev_copiedtoclip">Copied into clipboard</string>
-    <string name="aboutdev_appapps">How I\'ve code this app</string>
+    <string name="aboutdev_appapps">Informations on the application / GA</string>
 
     <string name="title_activity_video_player_v2">VideoPlayerV2</string>
     <string name="title_activity_video_player_activatesubs">Activate subtitles</string>
@@ -71,6 +77,13 @@
 
     <string name="loadingscreen_initial">Loading content.</string>
     <string name="loadingscreen_updatingviews">Displaying content.</string>
+    <string name="loadingscreen_updatingviews_download">Downloading episodes list</string>
+    <string name="loadingscreen_updatingviews_episodes">Prossesing episodes</string>
+    <string name="loadingscreen_updatingviews_films">Prossesing films</string>
+    <string name="loadingscreen_updatingviews_comics">Prossesing comics</string>
+    <string name="loadingscreen_updatingviews_allies">Prossesing allies</string>
+    <string name="loadingscreen_updatingviews_bonus">Prossesing bonus episodes</string>
+    <string name="loadingscreen_updatingviews_news">Prossesing news</string>
 
     <string name="menu_reloadcontent">Refresh content</string>
     <string name="menu_settings_style">Theme</string>
@@ -83,4 +96,16 @@
     <string name="action_newversion">New version</string>
     <string name="action_actualversion">Actual version</string>
     <string name="action_newupdate">New update</string>
+
+    <string name="privacy_yes">I accept</string>
+    <string name="privacy_no">I refuse</string>
+    <string name="privacy_title">Tracking consement</string>
+    <string name="privacy_message">This message will be displayed once. This version and the next ones contains the google analytics services. By clicking I accept you\'re accepting that usage data will be sent to google servers, if you refuse no data will be sent.</string>
+    <string name="privacy_change">Privacy settings</string>
+
+    <string name="error_episode_notreleased">Sorry the episode isn\'t avalible yet. UTC Date of release: </string>
+    <string name="error_episode_notreleased_unknown">Unknown</string>
+    <string name="error_episode_embeded">Sorry the episode is external to the NLR it can\'t be loaded on the application. Opening in a browser</string>
+    <string name="action_settings">Settings</string>
+
 </resources>

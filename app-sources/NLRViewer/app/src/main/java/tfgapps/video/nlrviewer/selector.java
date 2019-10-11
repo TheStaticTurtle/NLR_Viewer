@@ -12,13 +12,21 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.annotation.NonNull;
+//import android.support.customtabs.CustomTabsIntent;
+//import android.support.design.widget.NavigationView;
+//import android.support.v4.view.GravityCompat;
+//import android.support.v4.widget.DrawerLayout;
+//import android.support.v7.app.ActionBarDrawerToggle;
+//import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.browser.customtabs.CustomTabsIntent;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -64,10 +72,17 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
 
 public class selector extends AppCompatActivity {
 
-    String CURRENTREVISION = "nlr_viewer.v1.2.8.apk";
+    String CURRENTREVISION = "nlr_viewer.v1.2.9.apk";
     boolean DEBUGMODE = false;
     MLP_Content NLRVIDEOCONTENT;
     NLR_Content NLRCONTENT;
@@ -75,6 +90,7 @@ public class selector extends AppCompatActivity {
     Boolean done = false;
     int preventForkBombFromUpdate = 0;
     public ActionBarDrawerToggle mDrawerToggle;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         setTheme(translateTheme_toID(getConfig_getTheme()));
@@ -94,10 +110,15 @@ public class selector extends AppCompatActivity {
             Log.e("Oncreate","update",e);
         }
 
-        CheckUpdate();
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        //CheckUpdate();
+        TrackingAgreement(false);
         //int margin = calcDrawerLayoutMargin();
         //LinearLayout layout = findViewById(R.id.drawerHeaderLayout);
         //setMargins(layout,0,margin,0,0);
+
+
 
     }
     @Override public void onConfigurationChanged(Configuration newConfig) {
@@ -221,11 +242,16 @@ public class selector extends AppCompatActivity {
         new Thread(new Runnable() {
             public void run() {
                 try {
+
+                    tryToDisplayUpdateProgress(getResources().getString(R.string.loadingscreen_updatingviews_download));
+
                     String episodeJson = getJSON(apiUrl_Episodes,5000);
                     String filmJson = getJSON(apiUrl_Films,5000);
                     String comicsJson = getJSON(apiUrl_Comics,5000);
                     String newsJson = getJSON(apiUrl_News,5000);
                     String bonusJson = getJSON(apiUrl_Bonus,5000);
+
+                    tryToDisplayUpdateProgress(getResources().getString(R.string.loadingscreen_updatingviews_episodes));
 
                     // Prase episodes
                     JSONObject jsonObjEpisodes = new JSONObject(episodeJson);
@@ -263,7 +289,7 @@ public class selector extends AppCompatActivity {
                                 currentEp.url_vo_720p = epObj.getJSONObject("sources").getJSONObject("vo").getString("720");
                                 currentEp.url_vo_1080p = epObj.getJSONObject("sources").getJSONObject("vo").getString("1080");
                                 if(epObj.getString("status").contains("Bient")) { currentEp.released = false; } else { currentEp.released = true; }
-                                if(epObj.getString("status").contains("Embed"))  { currentEp.embedded= true; } else { currentEp.embedded = false; }
+                                if(epObj.getString("status").contains("Exter"))  { currentEp.embedded= true; } else { currentEp.embedded = false; }
                                 currentEp.releaseDate = epObj.getString("stream_date");
                                 eps.add(currentEp);
                             }
@@ -271,6 +297,8 @@ public class selector extends AppCompatActivity {
                             seasons.add(currentSeason);
                         }
                     }
+
+                    tryToDisplayUpdateProgress(getResources().getString(R.string.loadingscreen_updatingviews_films));
 
                     // Prase films
                     JSONArray filmListObj = new JSONArray(filmJson);
@@ -300,6 +328,8 @@ public class selector extends AppCompatActivity {
                         films.add(currentFilm);
                     }
 
+                    tryToDisplayUpdateProgress(getResources().getString(R.string.loadingscreen_updatingviews_news));
+
                     // Prase news
                     JSONArray newsListObj = new JSONArray(newsJson);
                     ArrayList<NLR_news> newsList = new ArrayList<>();
@@ -311,6 +341,8 @@ public class selector extends AppCompatActivity {
                         currentNews.url = newsObj.getString("url");
                         newsList.add(currentNews);
                     }
+
+                    tryToDisplayUpdateProgress(getResources().getString(R.string.loadingscreen_updatingviews_comics));
 
                     // Prase comics EN
                     JSONObject jsonObjComics = new JSONObject(comicsJson);
@@ -343,6 +375,7 @@ public class selector extends AppCompatActivity {
                         comicSeasonsEN.add(currentSeason);
                     }
 
+
                     //FR
                     ArrayList<NLR_ComicSeason> comicSeasonsFR = new ArrayList<>();
                     int globalComicCounterFR = 0;
@@ -371,6 +404,7 @@ public class selector extends AppCompatActivity {
                         comicSeasonsFR.add(currentSeason);
                     }
 
+                    tryToDisplayUpdateProgress(getResources().getString(R.string.loadingscreen_updatingviews_bonus));
                     // Prase bonus eps
                     JSONArray jsonObjBonusEpisodes = new JSONArray(bonusJson);
                     ArrayList<MLP_BonusSeason> seasonsBonus = new ArrayList<>();
@@ -409,7 +443,7 @@ public class selector extends AppCompatActivity {
                             currentEp.url_vo_720p = epObj.getJSONObject("sources").getJSONObject("vo").getString("720");
                             currentEp.url_vo_1080p = epObj.getJSONObject("sources").getJSONObject("vo").getString("1080");
                             if(epObj.getString("status").contains("Bient")) { currentEp.released = false; } else { currentEp.released = true; }
-                            if(epObj.getString("status").contains("Embed"))  { currentEp.embedded= true; } else { currentEp.embedded = false; }
+                            if(epObj.getString("status").contains("Exter"))  { currentEp.embedded= true; } else { currentEp.embedded = false; }
                             currentEp.releaseDate = epObj.getString("stream_date");
                             eps.add(currentEp);
                         }
@@ -418,54 +452,14 @@ public class selector extends AppCompatActivity {
 
 
                     }
-/*
-                    while( keysBonus.hasNext() ) {
-                        String key = (String) keysBonus.next();
-                        if ( jsonObjBonusEpisodes.get(key) instanceof JSONArray ) {
-                            globalBonusSeasonCounter = globalBonusSeasonCounter +1;
-                            MLP_BonusSeason currentSeason = new MLP_BonusSeason();
-                            currentSeason.id = Integer.parseInt(key)-1;
-                            ArrayList<MLP_BonusEpisode> eps = new ArrayList<>();
-                            JSONArray epListObjArray = ((JSONArray) jsonObjBonusEpisodes.get(key));
-                            for(int i=0; i < epListObjArray.length(); i++) {
-                                globalBonusEpisodeCounter = globalBonusEpisodeCounter +1;
-                                JSONObject epObj = ((JSONObject) epListObjArray.get(i));
-                                MLP_BonusEpisode currentEp = new MLP_BonusEpisode();
-                                currentEp.title = epObj.getString("title");
-                                currentEp.thumbUrl  = epObj.getString("thumbnail");
-                                currentEp.id_local = toint(epObj.getString("episode"));
-                                currentEp.id_global = toint(epObj.getString("slug"));
-                                currentEp.in_season_num = toint(epObj.getString("season"));
-                                currentEp.url_sub_fr = epObj.getJSONObject("subtitles").getJSONObject("fr").getString("srt");
-                                currentEp.url_sub_en = epObj.getJSONObject("subtitles").getJSONObject("en").getString("srt");
-                                currentEp.url_vf_240p = epObj.getJSONObject("sources").getJSONObject("vf").getString("240");
-                                currentEp.url_vf_360p = epObj.getJSONObject("sources").getJSONObject("vf").getString("360");
-                                currentEp.url_vf_480p = epObj.getJSONObject("sources").getJSONObject("vf").getString("480");
-                                currentEp.url_vf_720p = epObj.getJSONObject("sources").getJSONObject("vf").getString("720");
-                                currentEp.url_vf_1080p = epObj.getJSONObject("sources").getJSONObject("vf").getString("1080");
-                                currentEp.url_vo_240p = epObj.getJSONObject("sources").getJSONObject("vo").getString("240");
-                                currentEp.url_vo_360p = epObj.getJSONObject("sources").getJSONObject("vo").getString("360");
-                                currentEp.url_vo_480p = epObj.getJSONObject("sources").getJSONObject("vo").getString("480");
-                                currentEp.url_vo_720p = epObj.getJSONObject("sources").getJSONObject("vo").getString("720");
-                                currentEp.url_vo_1080p = epObj.getJSONObject("sources").getJSONObject("vo").getString("1080");
-                                if(epObj.getString("status").contains("Bient")) { currentEp.released = false; } else { currentEp.released = true; }
-                                if(epObj.getString("status").contains("Embed"))  { currentEp.embedded= true; } else { currentEp.embedded = false; }
-                                currentEp.releaseDate = epObj.getString("stream_date");
-                                eps.add(currentEp);
-                            }
-                            currentSeason.episodes = eps;
-                            seasonsBonus.add(currentSeason);
-                        }
-                    }
-*/
 
+                    tryToDisplayUpdateProgress(getResources().getString(R.string.loadingscreen_updatingviews_allies));
                     // Prase allied USING HTML
 
-                    Document docAllies = Jsoup.connect("http://www.newlunarrepublic.fr/allies")
-                            .maxBodySize(0)
-                            .timeout(0)
-                            .get();
+                    Document docAllies = Jsoup.parse(curl("http://www.newlunarrepublic.fr/allies",1000));
+                    Log.d("UPDATE","Done downloading doc");
                     Elements alliesListObj = docAllies.getElementsByClass("col md-6 text-center");
+                    Log.d("UPDATE","Done loading doc");
                     ArrayList<NLR_Allied> alliesList = new ArrayList<NLR_Allied>();
                     for(Element ally : alliesListObj) {
                         Element a = ally.getElementsByTag("a").first();
@@ -475,7 +469,10 @@ public class selector extends AppCompatActivity {
                         out.url = "" + a.attributes().get("href");
                         out.title = "" + a.text();
                         alliesList.add(out);
+                        Log.d("UPDATE",a.text());
                     }
+
+                    tryToDisplayUpdateProgress(getResources().getString(R.string.loadingscreen_updatingviews));
 
                     MLP_Content mlpresult = new MLP_Content();
                     mlpresult.seasons = seasons;
@@ -510,6 +507,18 @@ public class selector extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    public void tryToDisplayUpdateProgress(String text) {
+        try {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TextView t = findViewById(R.id.textView_loading);
+                    t.setText(text);
+                }
+            });
+        } catch (Exception e) {}
     }
     public void updateEveryThingFromTheNlrUsingHTML() {
         new Thread(new Runnable() {
@@ -872,6 +881,50 @@ public class selector extends AppCompatActivity {
         }
         return null;
     }
+
+    public String curl(String url,int timeout) {
+        HttpURLConnection c = null;
+        try {
+            URL u = new URL(url);
+            c = (HttpURLConnection) u.openConnection();
+            c.setRequestMethod("GET");
+            c.setRequestProperty("Content-length", "0");
+            c.setUseCaches(false);
+            c.setAllowUserInteraction(false);
+            c.setConnectTimeout(timeout);
+            c.setReadTimeout(timeout);
+            c.connect();
+            int status = c.getResponseCode();
+
+            switch (status) {
+                case 200:
+                case 201:
+                    BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line+"\n");
+                    }
+                    br.close();
+                    return sb.toString();
+            }
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (c != null) {
+                try {
+                    c.disconnect();
+                } catch (Exception ex) {
+                    Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
+    }
+
     public int toint(String number) {
         if(number==null || number.equals("null")) { return 0; }
         return Integer.parseInt(number);
@@ -1093,6 +1146,13 @@ public class selector extends AppCompatActivity {
                                 col.add(new Comic(c.title,cc.title,c.icon_url, new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
+
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("comics", c.title+" / "+cc.title);
+                                        bundle.putString("language","EN");
+                                        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+                                        mFirebaseAnalytics.logEvent("on_click_comics", bundle);
+
                                         social_openlink(c.pdf_vo);
                                         //Log.wtf("ONCLICKCOMIC",cc.title + " / " + c.title);
                                         //Log.wtf("ONCLICKCOMIC",c.pdf_vo);
@@ -1140,6 +1200,12 @@ public class selector extends AppCompatActivity {
                                 colVFR.add(new Comic(c.title,cc.title,c.icon_url, new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("comics", c.title+" / "+cc.title);
+                                        bundle.putString("language","FR");
+                                        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+                                        mFirebaseAnalytics.logEvent("on_click_comics", bundle);
+
                                         social_openlink(c.pdf_vo);
                                         //Log.wtf("ONCLICKCOMIC",cc.title + " / " + c.title);
                                         //Log.wtf("ONCLICKCOMIC",c.pdf_vo);
@@ -1205,19 +1271,19 @@ public class selector extends AppCompatActivity {
                     builder.setItems(cs, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            String text = quality.get(which);
+                            String textqua = quality.get(which);
 
                             String url= null;
-                            if(text == "VO / 240p") { url = selectedFilm.url_vo_240p; }
-                            if(text == "VO / 360p") { url = selectedFilm.url_vo_360p; }
-                            if(text == "VO / 480p") { url = selectedFilm.url_vo_480p; }
-                            if(text == "VO / 720p") { url = selectedFilm.url_vo_720p; }
-                            if(text == "VO / 1080p") { url = selectedFilm.url_vo_1080p; }
-                            if(text == "VF / 240p") { url = selectedFilm.url_vf_240p; }
-                            if(text == "VF / 360p") { url = selectedFilm.url_vf_360p; }
-                            if(text == "VF / 480p") { url = selectedFilm.url_vf_480p; }
-                            if(text == "VF / 720p") { url = selectedFilm.url_vf_720p; }
-                            if(text == "VF / 1080p") { url = selectedFilm.url_vf_1080p; }
+                            if(textqua == "VO / 240p") { url = selectedFilm.url_vo_240p; }
+                            if(textqua == "VO / 360p") { url = selectedFilm.url_vo_360p; }
+                            if(textqua == "VO / 480p") { url = selectedFilm.url_vo_480p; }
+                            if(textqua == "VO / 720p") { url = selectedFilm.url_vo_720p; }
+                            if(textqua == "VO / 1080p") { url = selectedFilm.url_vo_1080p; }
+                            if(textqua == "VF / 240p") { url = selectedFilm.url_vf_240p; }
+                            if(textqua == "VF / 360p") { url = selectedFilm.url_vf_360p; }
+                            if(textqua == "VF / 480p") { url = selectedFilm.url_vf_480p; }
+                            if(textqua == "VF / 720p") { url = selectedFilm.url_vf_720p; }
+                            if(textqua == "VF / 1080p") { url = selectedFilm.url_vf_1080p; }
 
                             final AlertDialog.Builder builder2 = new AlertDialog.Builder(new ContextThemeWrapper(selector.this, R.style.AlertDialogCustom));
                             CharSequence[] cs = subs.toArray(new CharSequence[subs.size()]);
@@ -1227,11 +1293,19 @@ public class selector extends AppCompatActivity {
                             builder2.setItems(cs, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    String text = subs.get(i);
+                                    String textsub = subs.get(i);
                                     String suburl= "none";
-                                    if(text == "None") { suburl = "none"; }
-                                    if(text == "SUB FR") { suburl = selectedFilm.url_sub_fr; }
-                                    if(text == "SUB EN") { suburl = selectedFilm.url_sub_fr; }
+                                    if(textsub == "None") { suburl = "none"; }
+                                    if(textsub == "SUB FR") { suburl = selectedFilm.url_sub_fr; }
+                                    if(textsub == "SUB EN") { suburl = selectedFilm.url_sub_fr; }
+
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("films", selectedFilm.title);
+                                    bundle.putString("quality",textqua);
+                                    bundle.putString("subtitles",textsub);
+                                    bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+                                    mFirebaseAnalytics.logEvent("on_click_films", bundle);
 
                                     Intent myIntent = new Intent(selector.this, VideoPlayerV2.class);
                                     Bundle b = new Bundle();
@@ -1308,19 +1382,19 @@ public class selector extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            String text = quality.get(which);
+                            String textqua = quality.get(which);
 
                             String url= null;
-                            if(text == "VO / 240p") { url = clickedEpisode.url_vo_240p; }
-                            if(text == "VO / 360p") { url = clickedEpisode.url_vo_360p; }
-                            if(text == "VO / 480p") { url = clickedEpisode.url_vo_480p; }
-                            if(text == "VO / 720p") { url = clickedEpisode.url_vo_720p; }
-                            if(text == "VO / 1080p") { url = clickedEpisode.url_vo_1080p; }
-                            if(text == "VF / 240p") { url = clickedEpisode.url_vf_240p; }
-                            if(text == "VF / 360p") { url = clickedEpisode.url_vf_360p; }
-                            if(text == "VF / 480p") { url = clickedEpisode.url_vf_480p; }
-                            if(text == "VF / 720p") { url = clickedEpisode.url_vf_720p; }
-                            if(text == "VF / 1080p") { url = clickedEpisode.url_vf_1080p; }
+                            if(textqua == "VO / 240p") { url = clickedEpisode.url_vo_240p; }
+                            if(textqua == "VO / 360p") { url = clickedEpisode.url_vo_360p; }
+                            if(textqua == "VO / 480p") { url = clickedEpisode.url_vo_480p; }
+                            if(textqua == "VO / 720p") { url = clickedEpisode.url_vo_720p; }
+                            if(textqua == "VO / 1080p") { url = clickedEpisode.url_vo_1080p; }
+                            if(textqua == "VF / 240p") { url = clickedEpisode.url_vf_240p; }
+                            if(textqua == "VF / 360p") { url = clickedEpisode.url_vf_360p; }
+                            if(textqua == "VF / 480p") { url = clickedEpisode.url_vf_480p; }
+                            if(textqua == "VF / 720p") { url = clickedEpisode.url_vf_720p; }
+                            if(textqua == "VF / 1080p") { url = clickedEpisode.url_vf_1080p; }
 
                             final AlertDialog.Builder builder2 = new AlertDialog.Builder(new ContextThemeWrapper(selector.this, R.style.AlertDialogCustom));
                             CharSequence[] cs = subs.toArray(new CharSequence[subs.size()]);
@@ -1331,10 +1405,17 @@ public class selector extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     String suburl= "empty";
-                                    String text = subs.get(i);
-                                    if(text == "None") { suburl = "none"; }
-                                    if(text == "SUB FR") { suburl = clickedEpisode.url_sub_fr; }
-                                    if(text == "SUB EN") { suburl = clickedEpisode.url_sub_en; }
+                                    String textsub = subs.get(i);
+                                    if(textsub == "None") { suburl = "none"; }
+                                    if(textsub == "SUB FR") { suburl = clickedEpisode.url_sub_fr; }
+                                    if(textsub == "SUB EN") { suburl = clickedEpisode.url_sub_en; }
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("episodes", "Season"+String.valueOf(clickedEpisode.in_season_num)+"-Episode"+String.valueOf(clickedEpisode.id_local));
+                                    bundle.putString("quality",textqua);
+                                    bundle.putString("subtitles",textsub);
+                                    bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+                                    mFirebaseAnalytics.logEvent("on_click_episode", bundle);
 
                                     Intent myIntent = new Intent(selector.this, VideoPlayerV2.class);
                                     Bundle b = new Bundle();
@@ -1358,12 +1439,18 @@ public class selector extends AppCompatActivity {
                         }
                     });
                 } else if(!clickedEpisode.released) {
-                    final String Rtext = "Release date: "+clickedEpisode.releaseDate;
+                    String tmp ="";
+                    if(clickedEpisode.releaseDate == null || clickedEpisode.releaseDate == "null" ) {
+                        tmp = getResources().getString(R.string.error_episode_notreleased_unknown);
+                    } else {
+                        tmp = clickedEpisode.releaseDate;
+                    }
+                    final String Rtext = tmp;
                     dialog.dismiss();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast t = Toast.makeText(selector.this ,"Sorry this episode isn't avalible yet.\n"+Rtext+" \nIf you think it's a bug contact me",Toast.LENGTH_SHORT);
+                            Toast t = Toast.makeText(selector.this ,getResources().getString(R.string.error_episode_notreleased)+Rtext,Toast.LENGTH_SHORT);
                             t.show();
                         }
                     });
@@ -1372,8 +1459,9 @@ public class selector extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast t = Toast.makeText(selector.this ,"Sorry this episode is embedded (Not supported yet).\nGo at newlunarrepublic.fr to watch it \nIf you think it's a bug contact me",Toast.LENGTH_SHORT);
+                            Toast t = Toast.makeText(selector.this ,getResources().getString(R.string.error_episode_embeded),Toast.LENGTH_LONG);
                             t.show();
+                            social_openlink("https://newlunarrepublic.fr/episodes/"+String.valueOf(clickedEpisode.id_global)+"#TO-THE-MOON");
                         }
                     });
                 }
@@ -1419,19 +1507,19 @@ public class selector extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            String text = quality.get(which);
+                            String textqua = quality.get(which);
 
                             String url= null;
-                            if(text == "VO / 240p") { url = clickedEpisode.url_vo_240p; }
-                            if(text == "VO / 360p") { url = clickedEpisode.url_vo_360p; }
-                            if(text == "VO / 480p") { url = clickedEpisode.url_vo_480p; }
-                            if(text == "VO / 720p") { url = clickedEpisode.url_vo_720p; }
-                            if(text == "VO / 1080p") { url = clickedEpisode.url_vo_1080p; }
-                            if(text == "VF / 240p") { url = clickedEpisode.url_vf_240p; }
-                            if(text == "VF / 360p") { url = clickedEpisode.url_vf_360p; }
-                            if(text == "VF / 480p") { url = clickedEpisode.url_vf_480p; }
-                            if(text == "VF / 720p") { url = clickedEpisode.url_vf_720p; }
-                            if(text == "VF / 1080p") { url = clickedEpisode.url_vf_1080p; }
+                            if(textqua == "VO / 240p") { url = clickedEpisode.url_vo_240p; }
+                            if(textqua == "VO / 360p") { url = clickedEpisode.url_vo_360p; }
+                            if(textqua == "VO / 480p") { url = clickedEpisode.url_vo_480p; }
+                            if(textqua == "VO / 720p") { url = clickedEpisode.url_vo_720p; }
+                            if(textqua == "VO / 1080p") { url = clickedEpisode.url_vo_1080p; }
+                            if(textqua == "VF / 240p") { url = clickedEpisode.url_vf_240p; }
+                            if(textqua == "VF / 360p") { url = clickedEpisode.url_vf_360p; }
+                            if(textqua == "VF / 480p") { url = clickedEpisode.url_vf_480p; }
+                            if(textqua == "VF / 720p") { url = clickedEpisode.url_vf_720p; }
+                            if(textqua == "VF / 1080p") { url = clickedEpisode.url_vf_1080p; }
 
                             final AlertDialog.Builder builder2 = new AlertDialog.Builder(new ContextThemeWrapper(selector.this, R.style.AlertDialogCustom));
                             CharSequence[] cs = subs.toArray(new CharSequence[subs.size()]);
@@ -1442,12 +1530,18 @@ public class selector extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     String suburl= "empty";
-                                    String text = subs.get(i);
-                                    if(text == "None") { suburl = "none"; }
-                                    if(text == "SUB FR") { suburl = clickedEpisode.url_sub_fr; }
-                                    if(text == "SUB EN") { suburl = clickedEpisode.url_sub_fr; }
+                                    String textsub = subs.get(i);
+                                    if(textsub == "None") { suburl = "none"; }
+                                    if(textsub == "SUB FR") { suburl = clickedEpisode.url_sub_fr; }
+                                    if(textsub == "SUB EN") { suburl = clickedEpisode.url_sub_fr; }
 
 
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("episodes", clickedEpisode.title+" / "+seList.getSelectedItem().toString());
+                                    bundle.putString("quality",textqua);
+                                    bundle.putString("subtitles",textsub);
+                                    bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+                                    mFirebaseAnalytics.logEvent("on_click_bonus", bundle);
 
                                     Intent myIntent = new Intent(selector.this, VideoPlayerV2.class);
                                     Bundle b = new Bundle();
@@ -1561,15 +1655,23 @@ public class selector extends AppCompatActivity {
     public void bindSocialButtonsForDev() {
         ImageButton webBtn = findViewById(R.id.btnAboutDev_web);
         ImageButton gitBtn = findViewById(R.id.btnAboutDev_git);
-        ImageButton mailBtn = findViewById(R.id.btnAboutDev_mail);
-        ImageButton ppalBtn = findViewById(R.id.btnAboutDev_ppal);
-        ImageButton btcBtn = findViewById(R.id.btnAboutDev_btc);
         Button appBtn = findViewById(R.id.btnAboutDev_appapi);
-        webBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_openlink(getResources().getString(R.string.aboutdev_web));  } });
-        gitBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_openlink(getResources().getString(R.string.aboutdev_github));  } });
-        mailBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_senmail(getResources().getString(R.string.aboutdev_mail));  } });
-        ppalBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_openlink(getResources().getString(R.string.aboutdev_ppal));  } });
-        btcBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_copyClipboard(getResources().getString(R.string.aboutdev_btc).replace("BTC: ",""));  } });
+        webBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) {
+            social_openlink(getResources().getString(R.string.aboutdev_web));
+
+            Bundle bundle = new Bundle();
+            bundle.putString("what","http://samuel.tugler.fr");
+            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+            mFirebaseAnalytics.logEvent("social_click", bundle);
+        } });
+        gitBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) {
+            social_openlink(getResources().getString(R.string.aboutdev_github));
+
+            Bundle bundle = new Bundle();
+            bundle.putString("what","http://github.com/TurtleForGaming");
+            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+            mFirebaseAnalytics.logEvent("social_click", bundle);
+        } });
         appBtn.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { ((ViewFlipper)findViewById(R.id.layoutFlipper)).setDisplayedChild(9); }});
     }
 
@@ -1640,6 +1742,14 @@ public class selector extends AppCompatActivity {
     }
 
     public void settings_bindViews() {
+        Button privacyBtn = findViewById(R.id.config_btn_changePrivacy);
+        privacyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TrackingAgreement(true);
+            }
+        });
+
         Spinner ThemeSelector = findViewById(R.id.config_spinner_theme);
         Spinner LangSelector = findViewById(R.id.config_spinner_lang);
         Button saveBtn = findViewById(R.id.config_btn_save);
@@ -1785,13 +1895,24 @@ public class selector extends AppCompatActivity {
             if(k.equals("King Sombra")) { themeRandomKingSombra.setChecked(true); }
         }
     }
-    public void writeConfig_writeLang(String theme) {
+    public void writeConfig_writeLang(String lang) {
+        Bundle bundle = new Bundle();
+        bundle.putString("lang",lang);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent("settings_changes", bundle);
+
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_theme", MODE_PRIVATE);
         sharedPreferences.edit()
-                .putString("applang",theme)
+                .putString("applang",lang)
                 .apply();
     }
     public void writeConfig_writeTheme(String theme) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("theme",theme);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent("settings_changes", bundle);
+
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_theme", MODE_PRIVATE);
         sharedPreferences.edit()
                 .putString("apptheme",theme)
@@ -1948,6 +2069,8 @@ public class selector extends AppCompatActivity {
     }
     public String CheckUrl2(String url) {
         if(url==null || url.equals("null")) {return null;}
+        return url;
+        /*   TO LONG Just returning if url allowed in json
         try{
             URL urll = new URL(url);
             HttpURLConnection huc =  ( HttpURLConnection )  urll.openConnection ();
@@ -1963,10 +2086,11 @@ public class selector extends AppCompatActivity {
             else
                 return null;
         } catch (Exception e) { Log.e("CheckUrl2","Error",e); return null; }
+        */
     }
 
-    public void CheckUpdate() {
-        final String CurrentRevisonURL = "http://www.tugler.fr/samuel/turtleforgamingapps/files/download?file=nlr_viewer&latest=true&getrevision=true";
+    /*public void CheckUpdate() {
+        final String CurrentRevisonURL = "http://samuel.tugler.fr/redirect/?c=3";
         new Thread(new Runnable() {
             public void run() {
                 try {
@@ -1978,7 +2102,7 @@ public class selector extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (which){
                                     case DialogInterface.BUTTON_POSITIVE:
-                                        social_openlink("http://www.tugler.fr/samuel/turtleforgamingapps/files/download?file=nlr_viewer&latest=true");
+                                        social_openlink("http://samuel.tugler.fr/redirect/?c=2");
                                         break;
 
                                     case DialogInterface.BUTTON_NEGATIVE:
@@ -2011,8 +2135,46 @@ public class selector extends AppCompatActivity {
                 }
             }
         }).start();
-    }
+    }*/
 
+    public void TrackingAgreement(boolean ignorePreviousChoice) {
+        SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_traking", MODE_PRIVATE);
+        int value = sharedPreferences.getInt("allowtracking",-1);
+        if(value == -1 || ignorePreviousChoice) {
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_traking", MODE_PRIVATE);
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            sharedPreferences.edit()
+                                    .putInt("allowtracking",1)
+                                    .apply();
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            sharedPreferences.edit()
+                                    .putInt("allowtracking",0)
+                                    .apply();
+                            break;
+                    }
+                }
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(selector.this, R.style.AlertDialogCustom));
+            builder.setMessage(getResources().getString(R.string.privacy_message))
+                    .setPositiveButton(getResources().getString(R.string.privacy_yes), dialogClickListener)
+                    .setNegativeButton(getResources().getString(R.string.privacy_no), dialogClickListener)
+                    .setTitle(getResources().getString(R.string.privacy_title))
+                    .show();
+
+        } else if(value==1) {
+            mFirebaseAnalytics.setAnalyticsCollectionEnabled(true);
+        } else {
+            mFirebaseAnalytics.setAnalyticsCollectionEnabled(false);
+            mFirebaseAnalytics.resetAnalyticsData();
+        }
+    }
     public class MLP_Episode {
         public String title;
         public int id_global;
