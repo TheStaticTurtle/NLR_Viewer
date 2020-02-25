@@ -1,5 +1,5 @@
 ﻿# NLR Viewer
-### Version 1.2.9
+### Version 1.3.0
 It's an app that I've created to learn AndroidStudio and gifted it to the [nlr](https://newlunarrepublic.fr/).
 It uses these modules:
 
