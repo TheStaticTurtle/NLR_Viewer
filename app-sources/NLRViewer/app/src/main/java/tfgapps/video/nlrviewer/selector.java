@@ -81,8 +81,6 @@ import okhttp3.Request;
 
 
 public class selector extends AppCompatActivity {
-
-    String CURRENTREVISION = "nlr_viewer.v1.2.9.apk";
     boolean DEBUGMODE = false;
     MLP_Content NLRVIDEOCONTENT;
     NLR_Content NLRCONTENT;
@@ -1643,14 +1641,12 @@ public class selector extends AppCompatActivity {
         ImageButton twBtn = findViewById(R.id.button_nlr_twitter);
         ImageButton mlBtn = findViewById(R.id.button_nlr_sendmail);
         ImageButton diBtn = findViewById(R.id.button_nlr_discord);
-        ImageButton payBtn = findViewById(R.id.button_nlr_paypal);
         fbBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_openlink(getResources().getString(R.string.social_nlr_web));  } });
         fbBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_openfb(getResources().getString(R.string.social_nlr_fbPage),getResources().getString(R.string.social_nlr_fbPage_id));  } });
         twBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_opentwitter(getResources().getString(R.string.social_nlr_twitter).substring(1));  } });
         mlBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_senmail(getResources().getString(R.string.social_nlr_email));  } });
         diBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_openlink(getResources().getString(R.string.social_nlr_discord));  } });
         webBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_openlink(getResources().getString(R.string.social_nlr_web));  } });
-        payBtn.setOnClickListener(new View.OnClickListener() {  @Override public void onClick(View view) { social_openpaypal(getResources().getString(R.string.social_nlr_paypal_btnid));  } });
     }
     public void bindSocialButtonsForDev() {
         ImageButton webBtn = findViewById(R.id.btnAboutDev_web);

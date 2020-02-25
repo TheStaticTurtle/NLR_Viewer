@@ -40,7 +40,7 @@
         Donner envoyée vers google analytics:\n
          - Click sur un Episode / Film / Comic \n
          - Ouverture application \n
-         - Temps d\u0027utilisation / Watch time \n
+         - Temps d\'utilisation / Watch time \n
     </string>
 
     <string name="drawer_bugreport">Reporter un bug</string>
@@ -52,7 +52,6 @@
     <string name="email_intentText">Envoyer le rapport via MAIL</string>
 
     <string name="social_nlr_title">Social</string>
-    <string name="social_nlr_paypal">Paypal de la nlr</string>
 
     <string name="drawer_allies">Alliés</string>
 

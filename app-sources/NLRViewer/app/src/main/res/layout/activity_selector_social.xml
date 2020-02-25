@@ -120,28 +120,6 @@
             app:layout_constraintTop_toTopOf="@+id/button_nlr_discord" />
 
         <ImageButton
-            android:id="@+id/button_nlr_paypal"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_nlr_discord"
-            app:srcCompat="@drawable/ic_social_paypal" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/social_nlr_paypal"
-            app:layout_constraintBottom_toBottomOf="@+id/button_nlr_paypal"
-            app:layout_constraintStart_toEndOf="@+id/button_nlr_paypal"
-            app:layout_constraintTop_toTopOf="@+id/button_nlr_paypal" />
-
-        <ImageButton
             android:id="@+id/button_nlr_web"
             android:layout_width="64dp"
             android:layout_height="64dp"
