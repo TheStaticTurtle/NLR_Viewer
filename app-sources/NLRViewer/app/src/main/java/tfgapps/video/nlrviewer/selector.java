@@ -138,6 +138,20 @@ public class selector extends AppCompatActivity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {  return true;   }
         return super.onOptionsItemSelected(item);
     }
+
+    public void checkUpdate() {
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Document doc = Jsoup.connect("https://raw.githubusercontent.com/TurtleForGaming/NLR_Viewer/master/VERSION.txt").get();
+
+                } catch (Exception e) {
+                    Log.e("UpdateEpisodes", e.getMessage(), e);
+                }
+            }
+        }).start();
+    }
+
     public void firstSetUp(Boolean onCreate)    {
         ViewFlipper vf = (ViewFlipper)findViewById(R.id.layoutFlipper);
 

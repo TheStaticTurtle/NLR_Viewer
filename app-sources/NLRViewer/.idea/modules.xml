@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NLRViewer.iml" filepath="$PROJECT_DIR$/NLRViewer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/NLRViewer-app.iml" filepath="$PROJECT_DIR$/app/NLRViewer-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-sources-NLRViewer.iml" filepath="$PROJECT_DIR$/app-sources-NLRViewer.iml" />
     </modules>
   </component>
 </project>
