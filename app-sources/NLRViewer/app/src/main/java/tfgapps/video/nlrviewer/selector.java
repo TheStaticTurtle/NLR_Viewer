@@ -156,7 +156,7 @@ public class selector extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (which){
                                     case DialogInterface.BUTTON_POSITIVE:
-                                        social_openlink("https://github.com/TurtleForGaming/NLR_Viewer/releases/download/V"+gitVersion+"/nlr_viewer.v"+gitVersion+".apk");
+                                        social_openlink("https://github.com/TurtleForGaming/NLR_Viewer/releases/latest/download/nlr_viewer.apk");
                                         break;
 
                                     case DialogInterface.BUTTON_NEGATIVE:
