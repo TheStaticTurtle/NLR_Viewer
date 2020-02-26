@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -110,8 +111,8 @@ public class selector extends AppCompatActivity {
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        //CheckUpdate();
         TrackingAgreement(false);
+        checkUpdate();
         //int margin = calcDrawerLayoutMargin();
         //LinearLayout layout = findViewById(R.id.drawerHeaderLayout);
         //setMargins(layout,0,margin,0,0);
@@ -143,10 +144,45 @@ public class selector extends AppCompatActivity {
         new Thread(new Runnable() {
             public void run() {
                 try {
+                    PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+                    String version = pInfo.versionName;
+
                     Document doc = Jsoup.connect("https://raw.githubusercontent.com/TurtleForGaming/NLR_Viewer/master/VERSION.txt").get();
+                    String gitVersion = doc.text();
+
+                    if(!version.equals(gitVersion)) {
+                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which){
+                                    case DialogInterface.BUTTON_POSITIVE:
+                                        social_openlink("https://github.com/TurtleForGaming/NLR_Viewer/releases/download/V"+gitVersion+"/nlr_viewer.v"+gitVersion+".apk");
+                                        break;
+
+                                    case DialogInterface.BUTTON_NEGATIVE:
+                                        //No button clicked
+                                        break;
+                                }
+                            }
+                        };
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(selector.this, R.style.AlertDialogCustom));
+                        builder.setTitle(getString(R.string.action_newupdate))
+                                .setMessage(getString(R.string.action_newversion) + ": \n" + gitVersion + "\n\n"+getString(R.string.action_actualversion)+":\n"+version)
+                                .setPositiveButton("Download", dialogClickListener)
+                                .setNegativeButton("Pass", dialogClickListener);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                builder.show();
+                            }
+                        });
+                    }
 
                 } catch (Exception e) {
-                    Log.e("UpdateEpisodes", e.getMessage(), e);
+                    Log.e("checkUpdate", e.getMessage(), e);
+                    Toast.makeText(getApplicationContext(),"Failed to check update", Toast.LENGTH_LONG).show();
                 }
             }
         }).start();
@@ -2098,54 +2134,6 @@ public class selector extends AppCompatActivity {
         } catch (Exception e) { Log.e("CheckUrl2","Error",e); return null; }
         */
     }
-
-    /*public void CheckUpdate() {
-        final String CurrentRevisonURL = "http://samuel.tugler.fr/redirect/?c=3";
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Document doc = Jsoup.connect(CurrentRevisonURL).get();
-                    String a = doc.text();
-                    if(!a.equals(CURRENTREVISION) && !DEBUGMODE) {
-                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case DialogInterface.BUTTON_POSITIVE:
-                                        social_openlink("http://samuel.tugler.fr/redirect/?c=2");
-                                        break;
-
-                                    case DialogInterface.BUTTON_NEGATIVE:
-                                        //No button clicked
-                                        break;
-                                }
-                            }
-                        };
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(selector.this, R.style.AlertDialogCustom));
-                        builder.setTitle(getString(R.string.action_newupdate))
-                                .setMessage(getString(R.string.action_newversion) + ": \n" + a + "\n\n"+getString(R.string.action_actualversion)+":\n"+CURRENTREVISION)
-                                .setPositiveButton("Download", dialogClickListener)
-                                .setNegativeButton("Pass", dialogClickListener);
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                builder.show();
-                            }
-                        });
-                    } else {
-                        if(DEBUGMODE) {
-                            Toast.makeText(getApplication(), "Woaw you're running in debug mode", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.e("CheckUrl", "Thread", e);
-                    Toast.makeText(getApplication(), "Error:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-        }).start();
-    }*/
 
     public void TrackingAgreement(boolean ignorePreviousChoice) {
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("app_traking", MODE_PRIVATE);
