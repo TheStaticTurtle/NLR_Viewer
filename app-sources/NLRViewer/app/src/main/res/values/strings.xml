@@ -88,7 +88,7 @@
     <string name="loadingscreen_updatingviews_films">Traitement des films</string>
     <string name="loadingscreen_updatingviews_comics">Traitement des comics</string>
     <string name="loadingscreen_updatingviews_allies">Traitement des alliés</string>
-    <string name="loadingscreen_updatingviews_bonus">Traitement des àpisodes bonus</string>
+    <string name="loadingscreen_updatingviews_bonus">Traitement des épisodes bonus</string>
     <string name="loadingscreen_updatingviews_news">Traitement des news</string>
 
     <string name="menu_reloadcontent">Rafraîchir le contenu</string>
