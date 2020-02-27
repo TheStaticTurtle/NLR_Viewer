@@ -504,7 +504,7 @@ public class selector extends AppCompatActivity {
                     tryToDisplayUpdateProgress(getResources().getString(R.string.loadingscreen_updatingviews_allies));
                     // Prase allied USING HTML
 
-                    Document docAllies = Jsoup.parse(curl("http://www.newlunarrepublic.fr/allies",1000));
+                    Document docAllies = Jsoup.parse(curl("https://www.newlunarrepublic.fr/allies",1000));
                     Log.d("UPDATE","Done downloading doc");
                     Elements alliesListObj = docAllies.getElementsByClass("col md-6 text-center");
                     Log.d("UPDATE","Done loading doc");
@@ -513,7 +513,7 @@ public class selector extends AppCompatActivity {
                         Element a = ally.getElementsByTag("a").first();
                         Element img = a.getElementsByTag("img").first();
                         NLR_Allied out = new NLR_Allied();
-                        out.bannerUrl = "http://www.newlunarrepublic.fr" + img.attributes().get("src");
+                        out.bannerUrl = "https://www.newlunarrepublic.fr" + img.attributes().get("src");
                         out.url = "" + a.attributes().get("href");
                         out.title = "" + a.text();
                         alliesList.add(out);
@@ -612,8 +612,8 @@ public class selector extends AppCompatActivity {
                             String epReleaseIn = "Released"; if(!epReleased){
                                 try {
                                     //WebDriver driver=new FirefoxDriver();
-                                    //Document docEp = Jsoup.parse( new WebClient(BrowserVersion.CHROME).getPage("http://www.newlunarrepublic.fr/episodes/" + globalEpisodeCounter).asInstanceOf[HtmlPage].asXml );
-                                    Document docEp = Jsoup.connect("http://www.newlunarrepublic.fr/episodes/" + globalEpisodeCounter)
+                                    //Document docEp = Jsoup.parse( new WebClient(BrowserVersion.CHROME).getPage("https://www.newlunarrepublic.fr/episodes/" + globalEpisodeCounter).asInstanceOf[HtmlPage].asXml );
+                                    Document docEp = Jsoup.connect("https://www.newlunarrepublic.fr/episodes/" + globalEpisodeCounter)
                                             .maxBodySize(0)
                                             .timeout(0)
                                             .get();
@@ -623,7 +623,7 @@ public class selector extends AppCompatActivity {
                                     epReleaseIn =  raw.substring(start,stop).replace("var streamDate = '","").replace("'","");
                                 } catch (Exception e) {
                                     Log.e("GetReleaseDate",e.getMessage(),e);
-                                    Document docEp = Jsoup.connect("http://www.newlunarrepublic.fr/episodes/" + globalEpisodeCounter).get();
+                                    Document docEp = Jsoup.connect("https://www.newlunarrepublic.fr/episodes/" + globalEpisodeCounter).get();
                                     String raw = docEp.body().outerHtml();
                                     Log.e("GetReleaseDate",raw);
                                     epReleaseIn =  "Unknown";
@@ -639,8 +639,8 @@ public class selector extends AppCompatActivity {
                             currentEpisode.id_local = localEpisodeCounter;
                             currentEpisode.id_global = globalEpisodeCounter;
                             currentEpisode.in_season_num = seasonCounter;
-                            currentEpisode.url_sub_fr = "http://www.newlunarrepublic.fr/files/srt/MLP FiM - "+seasonCounter+"x"+addZero(localEpisodeCounter)+" FR.srt";
-                            currentEpisode.url_sub_en = "http://www.newlunarrepublic.fr/files/srt/MLP FiM - "+seasonCounter+"x"+addZero(localEpisodeCounter)+" EN.srt";
+                            currentEpisode.url_sub_fr = "https://www.newlunarrepublic.fr/files/srt/MLP FiM - "+seasonCounter+"x"+addZero(localEpisodeCounter)+" FR.srt";
+                            currentEpisode.url_sub_en = "https://www.newlunarrepublic.fr/files/srt/MLP FiM - "+seasonCounter+"x"+addZero(localEpisodeCounter)+" EN.srt";
 
                             if(epReleased){
                                 final int seasonCounter2=seasonCounter;
@@ -680,7 +680,7 @@ public class selector extends AppCompatActivity {
                     }
 
                     // Get film list :)
-                    Document docFilms = Jsoup.connect("http://www.newlunarrepublic.fr/films")
+                    Document docFilms = Jsoup.connect("https://www.newlunarrepublic.fr/films")
                             .maxBodySize(0)
                             .timeout(0)
                             .get();
@@ -695,11 +695,11 @@ public class selector extends AppCompatActivity {
                         Boolean epReleased = false; if(Realsed==0) { epReleased = true; }
 
                         currentFilm.codename = a.attributes().get("href").replace("/films/","");
-                        currentFilm.thumbUrl = "http://www.newlunarrepublic.fr/" + filmObj.getElementsByTag("img").first().attributes().get("src");
+                        currentFilm.thumbUrl = "https://www.newlunarrepublic.fr/" + filmObj.getElementsByTag("img").first().attributes().get("src");
                         currentFilm.id = globalFilmCounter;
                         currentFilm.released = epReleased;
                         currentFilm.title = filmObj.getElementsByTag("b").first().text();
-                        currentFilm.url = "http://www.newlunarrepublic.fr/films/"+currentFilm.codename;
+                        currentFilm.url = "https://www.newlunarrepublic.fr/films/"+currentFilm.codename;
                         currentFilm.url_vo_240p = "https://webm.newlunarrepublic.fr/videos/streaming/NLR-240p-"+currentFilm.codename+".webm";
                         currentFilm.url_vo_360p = "https://webm.newlunarrepublic.fr/videos/streaming/NLR-360p-"+currentFilm.codename+".webm";
                         currentFilm.url_vo_480p = "https://webm.newlunarrepublic.fr/videos/streaming/NLR-480p-"+currentFilm.codename+".webm";
@@ -710,8 +710,8 @@ public class selector extends AppCompatActivity {
                         currentFilm.url_vf_480p = "https://webm.newlunarrepublic.fr/videos/streaming/NLR-480p-"+currentFilm.codename+"-VF.webm";
                         currentFilm.url_vf_720p = "https://webm.newlunarrepublic.fr/videos/streaming/NLR-720p-"+currentFilm.codename+"-VF.webm";
                         currentFilm.url_vf_1080p = "https://webm.newlunarrepublic.fr/videos/streaming/NLR-1080p-"+currentFilm.codename+"-VF.webm";
-                        currentFilm.url_sub_en = "http://www.newlunarrepublic.fr/files/srt/MLP%20FiM%20-%20"+currentFilm.codename+"%20EN.srt";
-                        currentFilm.url_sub_fr = "http://www.newlunarrepublic.fr/files/srt/MLP%20FiM%20-%20"+currentFilm.codename+"%20FR.srt";
+                        currentFilm.url_sub_en = "https://www.newlunarrepublic.fr/files/srt/MLP%20FiM%20-%20"+currentFilm.codename+"%20EN.srt";
+                        currentFilm.url_sub_fr = "https://www.newlunarrepublic.fr/files/srt/MLP%20FiM%20-%20"+currentFilm.codename+"%20FR.srt";
                         filmList.add(currentFilm);
                     }
                     //// Done updateing videos
@@ -723,7 +723,7 @@ public class selector extends AppCompatActivity {
 
                     //// Start updating NLR
                     // Get allies
-                    Document docAllies = Jsoup.connect("http://www.newlunarrepublic.fr/allies")
+                    Document docAllies = Jsoup.connect("https://www.newlunarrepublic.fr/allies")
                             .maxBodySize(0)
                             .timeout(0)
                             .get();
@@ -733,14 +733,14 @@ public class selector extends AppCompatActivity {
                         Element a = ally.getElementsByTag("a").first();
                         Element img = a.getElementsByTag("img").first();
                         NLR_Allied out = new NLR_Allied();
-                        out.bannerUrl = "http://www.newlunarrepublic.fr" + img.attributes().get("src");
+                        out.bannerUrl = "https://www.newlunarrepublic.fr" + img.attributes().get("src");
                         out.url = "" + a.attributes().get("href");
                         out.title = "" + a.text();
                         alliesList.add(out);
                     }
 
                     //Get news
-                    Document docNews = Jsoup.connect("http://www.newlunarrepublic.fr/news")
+                    Document docNews = Jsoup.connect("https://www.newlunarrepublic.fr/news")
                             .maxBodySize(0)
                             .timeout(0)
                             .get();
@@ -748,7 +748,7 @@ public class selector extends AppCompatActivity {
                     ArrayList<NLR_news> NewsList = new ArrayList<NLR_news>();
                     for(Element news : NewsListObj) {
                         String date = news.getElementsByTag("small").first().text();
-                        String url = "http://www.newlunarrepublic.fr" + news.getElementsByTag("a").first().attributes().get("href");
+                        String url = "https://www.newlunarrepublic.fr" + news.getElementsByTag("a").first().attributes().get("href");
                         String newstitle = news.text().substring(0,news.text().length()-20);
                         NLR_news out = new NLR_news();
                         out.title = newstitle;
@@ -758,7 +758,7 @@ public class selector extends AppCompatActivity {
                     }
 
                     // Get comics
-                    Document docComics = Jsoup.connect("http://www.newlunarrepublic.fr/comics")
+                    Document docComics = Jsoup.connect("https://www.newlunarrepublic.fr/comics")
                             .maxBodySize(0)
                             .timeout(0)
                             .get();
@@ -784,7 +784,7 @@ public class selector extends AppCompatActivity {
                             NLR_Comic currentComic = new NLR_Comic();
                             currentComic.title = next.getElementsByTag("b").text();
                             currentComic.pdf_vo = next.getElementsByTag("a").first().attributes().get("href");
-                            currentComic.icon_url =  "http://www.newlunarrepublic.fr" + next.getElementsByTag("img").first().attributes().get("src");
+                            currentComic.icon_url =  "https://www.newlunarrepublic.fr" + next.getElementsByTag("img").first().attributes().get("src");
                             currentComic.ListTitle = currentComicSeasonEN.title;
                             currentComicListEN.add(currentComic);
                             h4 = next;
@@ -802,7 +802,7 @@ public class selector extends AppCompatActivity {
                             NLR_Comic currentComic = new NLR_Comic();
                             currentComic.title = next.getElementsByTag("b").text();
                             currentComic.pdf_vo = next.getElementsByTag("a").first().attributes().get("href");
-                            currentComic.icon_url =  "http://www.newlunarrepublic.fr" + next.getElementsByTag("img").first().attributes().get("src");
+                            currentComic.icon_url =  "https://www.newlunarrepublic.fr" + next.getElementsByTag("img").first().attributes().get("src");
                             currentComic.ListTitle = currentComicSeasonEN.title;
                             currentComicListEN.add(currentComic);
                             currentComicSeasonEN.commics = currentComicListEN;
@@ -827,7 +827,7 @@ public class selector extends AppCompatActivity {
                             NLR_Comic currentComic = new NLR_Comic();
                             currentComic.title = next.getElementsByTag("b").text();
                             currentComic.pdf_vo = next.getElementsByTag("a").first().attributes().get("href");
-                            currentComic.icon_url = "http://www.newlunarrepublic.fr" + next.getElementsByTag("img").first().attributes().get("src");
+                            currentComic.icon_url = "https://www.newlunarrepublic.fr" + next.getElementsByTag("img").first().attributes().get("src");
                             currentComic.ListTitle = currentComicSeasonFR.title;
                             currentComicListFR.add(currentComic);
                             h4 = next;
@@ -845,7 +845,7 @@ public class selector extends AppCompatActivity {
                             NLR_Comic currentComic = new NLR_Comic();
                             currentComic.title = next.getElementsByTag("b").text();
                             currentComic.pdf_vo = next.getElementsByTag("a").first().attributes().get("href");
-                            currentComic.icon_url = "http://www.newlunarrepublic.fr" + next.getElementsByTag("img").first().attributes().get("src");
+                            currentComic.icon_url = "https://www.newlunarrepublic.fr" + next.getElementsByTag("img").first().attributes().get("src");
                             currentComic.ListTitle = currentComicSeasonFR.title;
                             currentComicListFR.add(currentComic);
 
@@ -1706,7 +1706,7 @@ public class selector extends AppCompatActivity {
             social_openlink(getResources().getString(R.string.aboutdev_web));
 
             Bundle bundle = new Bundle();
-            bundle.putString("what","http://samuel.tugler.fr");
+            bundle.putString("what","https://turtleforgaming.fr");
             bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
             mFirebaseAnalytics.logEvent("social_click", bundle);
         } });
@@ -1714,7 +1714,7 @@ public class selector extends AppCompatActivity {
             social_openlink(getResources().getString(R.string.aboutdev_github));
 
             Bundle bundle = new Bundle();
-            bundle.putString("what","http://github.com/TurtleForGaming");
+            bundle.putString("what","https://github.com/TurtleForGaming");
             bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
             mFirebaseAnalytics.logEvent("social_click", bundle);
         } });
@@ -2298,4 +2298,3 @@ public class selector extends AppCompatActivity {
         public ArrayList<NLR_news> news;
     }
 }
-
