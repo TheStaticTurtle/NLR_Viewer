@@ -51,7 +51,7 @@
     <string name="email_intentText">Envoyer le rapport via MAIL</string>
 
     <string name="social_nlr_title">Social</string>
-    <string name="social_nlr_web" translatable="false">http://www.newlunarrepublic.fr</string>
+    <string name="social_nlr_web" translatable="false">https://www.newlunarrepublic.fr</string>
     <string name="social_nlr_fbPage" translatable="false">NlrFR</string>
     <string name="social_nlr_fbPage_id" translatable="false">1403225863250577</string>
     <string name="social_nlr_twitter" translatable="false">\@NlrFR</string>
@@ -69,7 +69,7 @@
 
     <string name="aboutdev_title">A propos du dev / App</string>
     <string name="aboutdev_by">Application développée par Turtleforgaming</string>
-    <string name="aboutdev_web" translatable="false">http://samuel.tugler.fr/</string>
+    <string name="aboutdev_web" translatable="false">https://turtleforgaming.fr</string>
     <string name="aboutdev_github" translatable="false">https://github.com/TurtleForGaming</string>
     <string name="aboutdev_copiedtoclip">Copier dans le presse papier</string>
     <string name="aboutdev_appapps">Information sur l\'application / GA</string>
