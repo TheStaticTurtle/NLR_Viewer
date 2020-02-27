@@ -12,6 +12,7 @@ import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 //import android.support.annotation.NonNull;
 //import android.support.customtabs.CustomTabsIntent;
@@ -99,26 +100,31 @@ public class selector extends AppCompatActivity {
         setContentView(R.layout.activity_selector);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        try {
-            firstSetUp(true);
-            if (!done) {
-                updateFromTheNlr();
-                done = true;
+        if (!isInternetAvailable()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(selector.this, R.style.AlertDialogCustom));
+            builder.setTitle(getString(R.string.no_internet))
+                    .setMessage(getString(R.string.no_internet_message))
+                    .setNeutralButton("OK", (dialog, id) -> finish())
+                    .show();
+        } else {
+            try {
+                firstSetUp(true);
+                if (!done) {
+                    updateFromTheNlr();
+                    done = true;
+                }
+            } catch (Exception e) {
+                Log.e("Oncreate", "update", e);
             }
-        } catch (Exception e) {
-            Log.e("Oncreate","update",e);
+
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+            TrackingAgreement(false);
+            checkUpdate();
+            //int margin = calcDrawerLayoutMargin();
+            //LinearLayout layout = findViewById(R.id.drawerHeaderLayout);
+            //setMargins(layout,0,margin,0,0);
         }
-
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
-        TrackingAgreement(false);
-        checkUpdate();
-        //int margin = calcDrawerLayoutMargin();
-        //LinearLayout layout = findViewById(R.id.drawerHeaderLayout);
-        //setMargins(layout,0,margin,0,0);
-
-
-
     }
     @Override public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -138,6 +144,11 @@ public class selector extends AppCompatActivity {
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {  return true;   }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isInternetAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
     public void checkUpdate() {
