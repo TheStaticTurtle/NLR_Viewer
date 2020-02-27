@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">New Lunar Republic</string>
     <string name="title_activity_video_player">VideoPlayer</string>
     <string name="title_activity_send_mail">Reporter un bug</string>
 
     <string name="navigation_drawer_open">Ouvrir la navigation</string>
-    <string name="navigation_drawer_close">Fermer la navigation</string>
+    <string name="navigation_drawer_close">Fermer la naigation</string>
 
     <string name="display_season">Saison</string>
     <string name="display_episode">Episode</string>
@@ -45,13 +44,20 @@
 
     <string name="drawer_bugreport">Reporter un bug</string>
     <string name="email_title">Titre: </string>
+    <string name="email_replyto">ReplyTo: </string>
     <string name="email_msg">Message: </string>
-    <string name="email_replyto">Repondre a: </string>
     <string name="email_needinstall">Veuiller installer un client mail</string>
     <string name="email_sended">Envoyer via mail</string>
     <string name="email_intentText">Envoyer le rapport via MAIL</string>
 
     <string name="social_nlr_title">Social</string>
+    <string name="social_nlr_web" translatable="false">https://www.newlunarrepublic.fr</string>
+    <string name="social_nlr_fbPage" translatable="false">NlrFR</string>
+    <string name="social_nlr_fbPage_id" translatable="false">1403225863250577</string>
+    <string name="social_nlr_twitter" translatable="false">\@NlrFR</string>
+    <string name="social_nlr_email" translatable="false">royalguard\@newlunarrepublic.fr</string>
+    <string name="social_nlr_site" translatable="false">newlunarrepublic.fr</string>
+    <string name="social_nlr_discord" translatable="false">https://discordapp.com/invite/suSxXSP</string>
 
     <string name="drawer_allies">Alliés</string>
 
@@ -63,13 +69,15 @@
 
     <string name="aboutdev_title">A propos du dev / App</string>
     <string name="aboutdev_by">Application développée par Turtleforgaming</string>
+    <string name="aboutdev_web" translatable="false">https://turtleforgaming.fr</string>
+    <string name="aboutdev_github" translatable="false">https://github.com/TurtleForGaming</string>
     <string name="aboutdev_copiedtoclip">Copier dans le presse papier</string>
     <string name="aboutdev_appapps">Information sur l\'application / GA</string>
 
     <string name="title_activity_video_player_v2">VideoPlayerV2</string>
     <string name="title_activity_video_player_activatesubs">Activer les sous-titres</string>
     <string name="title_activity_video_player_desactivatesubs">Desactiver les sous-titres</string>
-    <string name="title_activity_video_player_hideui">Cacher l\'UI</string>
+    <string name="title_activity_video_player_hideui">Cacher l\u0027UI</string>
     <string name="title_activity_video_player_rescale">Rescale</string>
     <string name="video_reloaderror">Il y a eu une erreur durant le chargement de la video.\nSi cela arrive souvent essayer de diminuer la qualitée\nLa video va redemarer</string>
 
@@ -87,22 +95,42 @@
     <string name="menu_reloadcontent">Rafraichir le contenu</string>
     <string name="menu_settings_style">Theme</string>
     <string name="menu_settings">Parametres</string>
+    <string-array name="menu_setting_styles">
+        <item>Default</item>
+        <item>Random</item>
+        <item>Twilight Sparkle</item>
+        <item>Apple Jack</item>
+        <item>Pinkie Pie</item>
+        <item>Rarity</item>
+        <item>Flutter Shy</item>
+        <item>Rainbow Dash</item>
+        <item>Spike</item>
+        <item>Luna</item>
+        <item>Celestia</item>
+        <item>King Sombra</item>
+    </string-array>
+    <string-array name="menu_setting_langs">
+        <item>Francais</item>
+        <item>English</item>
+    </string-array>
+
     <string name="menu_settings_lang">Langue</string>
     <string name="menu_settings_save">Sauvegarder</string>
 
     <string name="drawer_bonus">Episodes bonus</string>
+
+    <string name="action_settings">Paramettres</string>
     <string name="action_newversion">Nouvelle version</string>
     <string name="action_actualversion">Version actuelle</string>
     <string name="action_newupdate">Mise a jour disponible</string>
 
-    <string name="privacy_yes">J\'accepte</string>
+    <string name="privacy_yes">J\u0027accepte</string>
     <string name="privacy_no">Je refuse</string>
     <string name="privacy_title">Consentement tracking</string>
-    <string name="privacy_message">Ce message ne va s\'afficher qu\'une fois. Cette version et le prochaine contienne les analytics de google. En cliquant j\'accepte vous accepter l\u0027envoie des données d\u0027utilisation de l\u0027application, si vous refuser aucune donnée sera transimise</string>
+    <string name="privacy_message">Ce message ne va s\u0027afficher qu\u0027une fois. Cette version et le prochaine contienne les analytics de google. En cliquant j\u0027accepte vous accepter l\u0027envoie des données d\u0027utilisation de l\u0027application, si vous refuser aucune donnée sera transimise</string>
     <string name="privacy_change">Parametre de confidentialitée</string>
 
     <string name="error_episode_notreleased">Desoler cet episode n\u0027est pas encore disponible. Date UTC de sortie: </string>
     <string name="error_episode_notreleased_unknown">Inconnue</string>
     <string name="error_episode_embeded">Desoler cet episode est externe a la NLR, il ne peut pas s\u0027afficher sur l\u0027application. Ouverture d\u0027un navigateur</string>
-    <string name="action_settings">Paramettres</string>
 </resources>
